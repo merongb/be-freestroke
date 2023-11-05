@@ -1,0 +1,105 @@
+{
+    "GET /api" : {
+        "description" : "serves up a json representation of all the available endpoints"
+    },
+
+    "GET /api/locations" : {
+        "description" : "serves all the coordinates of safe swimming spots",
+        "queries" : "[rating, created_at, distance]",
+        "exampleResponse" : {
+            "locations" : [ {
+                "coordinates" : [53.4084,  2.9916],
+                "location_id": 1,
+                "created_at": "2020-06-20T07:24:00.000Z",
+                "location_name": "Lake near liverpool",
+                "location_area": "merseyside",
+                "location_img_url": "https://www.coppermines.co.uk/wp-content/uploads/2021/04/Lake-District-Cottages-Fantastic-Facts-About-the-Lake-District-Blog-Image.jpg"
+            }]
+        }
+    },
+    "GET /api/locations/:location_id": {
+        "description" : "serves up the details of a specific location",
+        "exampleResponse": {
+            "location" : [ 
+                {
+                    "coordinates" : [53.4084,  2.9916],
+                    "location_id": 1,
+                    "created_at": 1594329060000,
+                    "location_name": "Lake near liverpool",
+                    "location_area": "merseyside",
+                    "location_img_url": "https://www.coppermines.co.uk/wp-content/uploads/2021/04/Lake-District-Cottages-Fantastic-Facts-About-the-Lake-District-Blog-Image.jpg",
+                    "avg_rating": 4.5,
+                    "body": "description of the location",
+                    "review_count": 10
+                }
+
+            ]
+        }
+    },
+    "GET /api/locations/:location_id/reviews" : {
+        "description" : "serves up all the reviews on a specific location",
+        "exampleResponse": {
+            "reviews" : [
+                {
+                    "uid": "LZcUD0th7Tay0l2d6ODkJ8Zfi7s1",
+                    "review_id": 1,
+                    "username" : "johndoe",
+                    "votes": 1,
+                    "body" : "very cold but pretty safe otherwise",
+                    "created_at": "2020-06-20T07:24:00.000Z"
+                }
+            ]
+        }
+    },
+    "POST /api/locations/:location_id/reviews": {
+        "description": "posts a review based on location id",
+        "example path": "/api/locations/2/comments",
+        "example input": {
+            "newReview": {
+                "username": "rogershop",
+                "uid": "LZcUD0th7Tay0l2d6ODkJ8Zfi7s1",
+                "body": "The water is too deep",
+                "rating": 3
+            }
+        }
+    },
+    "DELETE /api/locations/location_id/:review_id" : {
+        "description" : "Deletes a comment based on review_id"
+    },
+    "PATCH /api/reviews/review_id" : {
+        "description" : "allows users to vote on reviews",
+        "example Body" : {
+            "inc_votes" : 1
+        },
+        "example path" : "/api/reviews/2",
+        "example input" : {
+            "uid": "LZcUD0th7Tay0l2d6ODkJ8Zfi7s1",
+            "review_id": 1,
+            "username" : "johndoe",
+            "votes": 1,
+            "body" : "very cold but pretty safe otherwise",
+            "created_at": "2020-06-20T07:24:00.000Z"
+        },
+        "exampleResponse" :{
+            "example output" : {
+            "uid": "LZcUD0th7Tay0l2d6ODkJ8Zfi7s1",
+            "review_id": 1,
+            "username" : "johndoe",
+            "votes": 2,
+            "body" : "very cold but pretty safe otherwise",
+            "created_at": "2020-06-20T07:24:00.000Z"
+        }
+    }
+    },
+    "POST /api/locations" : {
+        "description" : "allows users to post their new found locations",
+        "example Body" : {
+            "uid" :"LZcUD0th7Tay0l2d6ODkJ8Zfi7s1",
+            "location_name": "Lake near liverpool",
+            "coordinates" : [53.4084,  2.9916],
+            "??????" : "add image later >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+        }
+    }
+
+    
+}

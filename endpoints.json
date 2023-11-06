@@ -5,7 +5,8 @@
 
     "GET /api/locations" : {
         "description" : "serves all the coordinates of safe swimming spots",
-        "queries" : "[rating, created_at, distance]",
+        "queries" : ["sort_by", "distance", "order"],
+        "sort by": ["rating", "distance"],
         "exampleResponse" : {
             "locations" : [ {
                 "coordinates" : [53.4084,  2.9916],
@@ -40,6 +41,8 @@
     },
     "GET /api/locations/:location_id/reviews" : {
         "description" : "serves up all the reviews on a specific location",
+        "queries" : ["sort_by", "order"],
+        "sort by": ["rating", "created_at"],
         "exampleResponse": {
             "reviews" : [
                 {

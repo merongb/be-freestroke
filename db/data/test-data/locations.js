@@ -1,92 +1,92 @@
 module.exports = [
     {
         coordinates : [53.4084,  2.9916],
-        created_at: 1594329060000,
+        created_at: null,
         location_name: "Test lake spot",
         location_area: "Merseyside",
         water_classification: 'excellent',
-        img_and_body_api: "http://environment.data.gov.uk/data/bathing-water-profile/ukc2102-03600/2023:1",
-        water_classification_date_api: 'http://environment.data.gov.uk/data/bathing-water-quality/in-season/sample/point/03600/date/20230924/time/121500/recordDate/20230924'
+        water_classification_date: "2023-09-24T12:15:00",
+        location_img_url: "http://environment.data.gov.uk/media/image/bathing-water-profile/ukc2102-03600_1-webres.jpg",
+        body: "Spittal Beach is a gently sloping resort beach approximately one kilometre long situated immediately south of the mouth of the River Tweed."
     },
     {
-        coordinates: [53.4084, 2.9916],
-        created_at: 1594329061000,
-        location_name: "Beautiful Beach",
-        location_area: "Coastal Paradise",
-        water_classification: 'good',
-        img_and_body_api: 'http://environment.data.gov.uk/data/bathing-water-profile/ukh3311-11300/2023:1',
-        water_classification_date_api: 'http://environment.data.gov.uk/data/bathing-water-quality/in-season/sample/point/11300/date/20230913/time/112000/recordDate/20230913'
-    },
-    {
-        coordinates: [51.5074, -0.1278],
-        created_at: 1594329062000,
-        location_name: "City Park",
-        location_area: "Urban Oasis",
-        water_classification: 'sufficient',
-        img_and_body_api: 'http://environment.data.gov.uk/data/bathing-water-profile/ukh3311-11350/2023:1',
-        water_classification_date_api: 'http://environment.data.gov.uk/data/bathing-water-quality/in-season/sample/point/11350/date/20230921/time/103800/recordDate/20230921'
-    },
-    {
-        coordinates: [48.8588, 2.2945],
-        created_at: 1594329063000,
-        location_name: "Eiffel Tower View",
-        location_area: "Paris",
+        coordinates: [50.8267, -0.1384],
+        created_at: null,
+        location_name: "Brighton Beach",
+        location_area: "East Sussex",
         water_classification: 'excellent',
-        img_and_body_api: 'http://environment.data.gov.uk/data/bathing-water-profile/ukh3311-11500/2023:1',
-        water_classification_date_api: 'http://environment.data.gov.uk/data/bathing-water-quality/in-season/sample/point/11500/date/20230921/time/110800/recordDate/20230921'
+        water_classification_date: "2023-11-15T12:30:00",
+        location_img_url: "http://example.com/brighton-beach.jpg",
+        body: "Brighton Beach is a popular seaside destination on the south coast of England."
     },
     {
-        coordinates: [40.7128, -74.0060],
-        created_at: 1594329064000,
-        location_name: "Central Park Pond",
-        location_area: "New York City",
+        coordinates: [51.4656, -3.1664],
+        created_at: null,
+        location_name: "Barry Island",
+        location_area: "Vale of Glamorgan",
         water_classification: 'good',
-        img_and_body_api: 'http://environment.data.gov.uk/data/bathing-water-profile/ukh3311-11600/2023:1',
-        water_classification_date_api: 'http://environment.data.gov.uk/data/bathing-water-quality/in-season/sample/point/11600/date/20230921/time/114800/recordDate/20230921'
+        water_classification_date: "2023-11-10T14:15:00",
+        location_img_url: "http://example.com/barry-island.jpg",
+        body: "Barry Island is a family-friendly beach in South Wales."
     },
     {
-        coordinates: [34.0522, -118.2437],
-        created_at: 1594329065000,
-        location_name: "Sunset Beach",
-        location_area: "Los Angeles",
+        coordinates: [53.4740, -2.2436],
+        created_at: null,
+        location_name: "Liverpool Docks",
+        location_area: "Merseyside",
         water_classification: 'excellent',
-        img_and_body_api: 'http://environment.data.gov.uk/data/bathing-water-profile/ukh3311-11650/2023:1',
-        water_classification_date_api: 'http://environment.data.gov.uk/data/bathing-water-quality/in-season/sample/point/11650/date/20230921/time/112800/recordDate/20230921'
+        water_classification_date: "2023-11-05T13:00:00",
+        location_img_url: "http://example.com/liverpool-docks.jpg",
+        body: "Liverpool Docks offer scenic views of the Mersey River and historic waterfront."
     },
     {
-        coordinates: [41.8781, -87.6298],
-        created_at: 1594329066000,
-        location_name: "Lakefront Park",
-        location_area: "Chicago",
-        water_classification: 'sufficient',
-        img_and_body_api: 'http://environment.data.gov.uk/data/bathing-water-profile/ukh3311-11700/2023:1',
-        water_classification_date_api: 'http://environment.data.gov.uk/data/bathing-water-quality/in-season/sample/point/11700/date/20230913/time/140400/recordDate/20230913'
+        coordinates: [55.9533, -3.1883],
+        created_at: null,
+        location_name: "Portobello Beach",
+        location_area: "Edinburgh",
+        water_classification: 'excellent',
+        water_classification_date: "2023-10-25T11:30:00",
+        location_img_url: "http://example.com/portobello-beach.jpg",
+        body: "Portobello Beach is a charming coastal suburb in the Scottish capital."
     },
     {
-        coordinates: [37.7749, -122.4194],
-        created_at: 1594329067000,
-        location_name: "Golden Gate View",
-        location_area: "San Francisco",
+        coordinates: [51.4415, -2.4756],
+        created_at: null,
+        location_name: "Weston-super-Mare",
+        location_area: "Somerset",
         water_classification: 'good',
-        img_and_body_api: 'http://environment.data.gov.uk/data/bathing-water-profile/ukh3306-11750/2023:1',
-        water_classification_date_api: 'http://environment.data.gov.uk/data/bathing-water-quality/in-season/sample/point/11750/date/20230921/time/134800/recordDate/20230921'
+        water_classification_date: "2023-11-01T14:45:00",
+        location_img_url: "http://example.com/weston-super-mare.jpg",
+        body: "Weston-super-Mare is a traditional seaside town on the Bristol Channel coast."
     },
     {
-        coordinates: [35.6895, 139.6917],
-        created_at: 1594329068000,
-        location_name: "Cherry Blossom Park",
-        location_area: "Tokyo",
+        coordinates: [53.4808, -2.2426],
+        created_at: null,
+        location_name: "Albert Dock",
+        location_area: "Liverpool",
         water_classification: 'excellent',
-        img_and_body_api: 'http://environment.data.gov.uk/data/bathing-water-profile/ukk1302-11760/2023:1',
-        water_classification_date_api: 'http://environment.data.gov.uk/data/bathing-water-quality/in-season/sample/point/11760/date/20230925/time/110900/recordDate/20230925'
+        water_classification_date: "2023-10-30T12:15:00",
+        location_img_url: "http://example.com/albert-dock.jpg",
+        body: "Albert Dock is a vibrant waterfront complex in Liverpool's city center."
     },
     {
-        coordinates: [25.276987, 51.517309],
-        created_at: 1594329069000,
-        location_name: "Desert Oasis",
-        location_area: "Qatar",
-        water_classification: 'sufficient',
-        img_and_body_api: 'http://environment.data.gov.uk/data/bathing-water-profile/ukh3100-11770/2023:1',
-        water_classification_date_api: 'http://environment.data.gov.uk/data/bathing-water-quality/in-season/sample/point/11770/date/20230918/time/132000/recordDate/20230918'
+        coordinates: [50.7192, -1.8795],
+        created_at: null,
+        location_name: "Bournemouth Beach",
+        location_area: "Dorset",
+        water_classification: 'good',
+        water_classification_date: "2023-10-15T11:00:00",
+        location_img_url: "http://example.com/bournemouth-beach.jpg",
+        body: "Bournemouth Beach is a popular stretch of golden sand on the South Coast."
+    },
+    {
+        coordinates: [51.6214, -3.9436],
+        created_at: null,
+        location_name: "Swansea Bay",
+        location_area: "Swansea",
+        water_classification: 'excellent',
+        water_classification_date: "2023-10-20T15:30:00",
+        location_img_url: "http://example.com/swansea-bay.jpg",
+        body: "Swansea Bay offers scenic views of the Gower Peninsula and Mumbles Lighthouse."
     }    
 ]

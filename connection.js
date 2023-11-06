@@ -6,7 +6,6 @@ dotenv.config({
   path: `${__dirname}/../.env.${ENV}`
   
 })
-console.log(ENV)
 if (!process.env.MONGO_URL) {
   throw new Error('MONGO_URL not set')
 }

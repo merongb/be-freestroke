@@ -16,6 +16,7 @@ const getCoastalSpots = async () => {
 
         const formattedItem = {
             coordinates: [item.samplingPoint.long, item.samplingPoint.lat],
+            created_at: null,
             location_name: item.name._value,
             location_area: item.district[0].name._value,
             water_classification: item.latestComplianceAssessment

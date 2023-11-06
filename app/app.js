@@ -17,9 +17,6 @@ const {
     removeReview,
 } = require('../controllers/locations_controller');
 
-const {
-    getAllUsers
-} = require('../controllers/users_controller');
 
 
 
@@ -33,7 +30,6 @@ app.get("/api/location/:location_id/reviews", getReviewsById )
 app.post("/api/location/:location_id/reviews", postReview)
 app.patch("/api/locations/:location_id", patchLocationById)
 app.delete("/api/location/:location_id/reviews", removeReview)
-app.get("/api/users", getAllUsers)
 
 app.use(handleMongoErrors)
 app.use(handleErrors)

@@ -1,6 +1,7 @@
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
+const cron = require('node-cron')
 
 const allSwimSpotsAPI = axios.create({ baseURL: 'https://environment.data.gov.uk/doc/bathing-water?_pageSize=500' });
 
@@ -35,5 +36,9 @@ const getCoastalSpots = async () => {
     return formattedData
 }
 
+cron.schedule('0 0 * * 1', async () => {
+    console.log('Scheduled update started.');
+    await getCoastalSpots();
+});
+
 getCoastalSpots();
-    

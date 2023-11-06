@@ -5,7 +5,6 @@ const reviewData = require('../data/test-data/reviews')
 
 const LocationModel = mongoose.model('Location', new mongoose.Schema({
   coordinates: [Number],
-  location_id: Number,
   created_at: Number,
   location_name: String,
   location_area: String,
@@ -13,6 +12,7 @@ const LocationModel = mongoose.model('Location', new mongoose.Schema({
   body: String,
   review_count: Number,
   water_classification: String,
+  water_classification_date: String
 },
 { versionKey: false }
 ));

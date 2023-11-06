@@ -5,7 +5,8 @@
 
     "GET /api/locations" : {
         "description" : "serves all the coordinates of safe swimming spots",
-        "queries" : "[rating, created_at, distance]",
+        "queries" : ["sort_by", "distance", "order"],
+        "sort by": ["rating", "distance"],
         "exampleResponse" : {
             "locations" : [ {
                 "coordinates" : [53.4084,  2.9916],
@@ -32,7 +33,8 @@
                     "avg_rating": 4.5,
                     "body": "description of the location",
                     "review_count": 10,
-                    "water_classification": "Excellent"
+                    "water_classification": "Excellent",
+                    "water_classification_date": "2023-09-24T12:15:00"
                 }
 
             ]
@@ -40,6 +42,8 @@
     },
     "GET /api/locations/:location_id/reviews" : {
         "description" : "serves up all the reviews on a specific location",
+        "queries" : ["sort_by", "order"],
+        "sort by": ["rating", "created_at"],
         "exampleResponse": {
             "reviews" : [
                 {

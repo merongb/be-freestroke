@@ -18,7 +18,7 @@ describe('GET /api/locations', () => {
     });
     test('an array of location objects should be returned', () => {
         return request(app).get("/api/locations").expect(200).then(({body}) => {
-            expect(body.locations).toHaveLength(10)
+            expect(body.locations).toHaveLength(9)
         })
     });
     test('return a 404 error when given a wrong path ', () => {

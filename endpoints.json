@@ -33,7 +33,8 @@
                     "avg_rating": 4.5,
                     "body": "description of the location",
                     "review_count": 10,
-                    "water_classification": "Excellent"
+                    "water_classification": "Excellent",
+                    "water_classification_date": "2023-09-24T12:15:00"
                 }
 
             ]

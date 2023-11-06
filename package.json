@@ -12,6 +12,7 @@
   },
   "scripts": {
     "test": "NODE_ENV=test jest --passWithNoTests",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "seed": "NODE_ENV=test node ./db/seeds/run-seed.js"
   }
 }

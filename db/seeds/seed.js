@@ -33,6 +33,7 @@ const ReviewModel = mongoose.model('Review', new mongoose.Schema({
 function seedData(locationData, reviewData, LocationModel, ReviewModel) {
     
     return Promise.all([
+      
       LocationModel.collection.drop(),
       ReviewModel.collection.drop(),
     ])

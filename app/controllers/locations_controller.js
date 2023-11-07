@@ -18,4 +18,7 @@ const {location_id} = req.params
 fetchLocationById(location_id).then((location) => {
     res.status(200).send({ location })
 })
+.catch((err) => {
+    next(err)
+})
 }

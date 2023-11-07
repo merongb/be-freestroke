@@ -22,7 +22,8 @@ describe('GET /api/locations', () => {
         })
     });
     test('return a 404 error when given a wrong path ', () => {
-        return request(app).get("/api/banana").expect(404)
+        return request(app).get("/api/banana").expect(404).then(({body}) => {
+        })
     });
 });
 
@@ -32,21 +33,29 @@ describe('GET /api/locations/:location_id', () => {
     }); 
     test('returns a location by the id with the following properties', () => {
         return request(app).get("/api/locations/9").expect(200).then(({body}) => {
-           expect(body.location).toHaveProperty("coordinates", expect.any(Array));
-           expect(body.location).toHaveProperty("location_name", expect.any(String));
-           expect(body.location).toHaveProperty("location_area", expect.any(String));
-           expect(body.location).toHaveProperty("location_img_url", expect.any(String));
-           expect(body.location).toHaveProperty("water_classification", expect.any(String));
-           expect(body.location).toHaveProperty("water_classification_date", expect.any(String));
+           expect(body.location[0]).toHaveProperty("coordinates", expect.any(Array));
+           expect(body.location[0]).toHaveProperty("location_name", expect.any(String));
+           expect(body.location[0]).toHaveProperty("location_area", expect.any(String));
+           expect(body.location[0]).toHaveProperty("location_img_url", expect.any(String));
+           expect(body.location[0]).toHaveProperty("water_classification", expect.any(String));
+           expect(body.location[0]).toHaveProperty("water_classification_date", expect.any(String));
         })
     });
+    test("should return a status code of 404 Not Found for a location_id that does not exist", () => {
+        return request(app)
+          .get("/api/locations/99")
+          .expect(404)
+          .then(({ body }) => {
+            expect(body.message).toBe('Location Does Not Exist!')
+          });
+      });
 
 });
 
-describe("GET /api/location/:location_id/reviews", () => {
+describe("GET /api/locations/:location_id/reviews", () => {
     test("should return a status code of 200 with an array of reviews for the given location_id, ordered by latest", () => {
       return request(app)
-        .get("/api/location/1/reviews")
+        .get("/api/locations/1/reviews")
         .expect(200)
         .then(({ body }) => {
           expect(Array.isArray(body.reviews)).toBe(true);
@@ -65,7 +74,7 @@ describe("GET /api/location/:location_id/reviews", () => {
   
 test("should return a status code of 404 Not Found for a location_id that does not exist", () => {
       return request(app)
-        .get("/api/location/99/reviews")
+        .get("/api/locations/99/reviews")
         .expect(404)
         .then(({ body }) => {
           expect(body.message).toBe("Not Found");
@@ -75,7 +84,7 @@ test("should return a status code of 404 Not Found for a location_id that does n
   
     test("should return a status code of 400 Bad Request for an invalid location_id", () => {
       return request(app)
-        .get("/api/location/nolocation/reviews")
+        .get("/api/locations/nolocation/reviews")
         .expect(400)
         .then(({ body }) => {
           expect(body.message).toBe("Bad Request");

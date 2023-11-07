@@ -9,7 +9,7 @@ app.use(express.json())
 // app.get("/api", getAllEndpoints);
 app.get("/api/locations", getAllLocations);
 app.get("/api/locations/:location_id", getLocationById);
-app.get("/api/location/:location_id/reviews", getReviewsByLocationId )
+app.get("/api/locations/:location_id/reviews", getReviewsByLocationId )
 // app.post("/api/location/:location_id/reviews", postReview)
 // app.patch("/api/locations/:location_id", patchLocationById)
 // app.delete("/api/location/:location_id/reviews", removeReview)

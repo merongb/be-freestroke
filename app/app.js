@@ -1,4 +1,5 @@
 const express = require("express")
+const { getAllEndpoints } = require('../app/controllers/endpoints_controller')
 const {	getAllLocations,getLocationById} = require('../app/controllers/locations_controller');
 const {	getReviewsByLocationId, postReview, deleteReview } = require("../app/controllers/reviews_controller");
 const { handleMongoErrors, handleErrors } = require("./error-handler");
@@ -6,7 +7,7 @@ const { handleMongoErrors, handleErrors } = require("./error-handler");
 const app = express()
 app.use(express.json())
 
-// app.get("/api", getAllEndpoints);
+app.get("/api", getAllEndpoints);
 app.get("/api/locations", getAllLocations);
 app.get("/api/locations/:location_id", getLocationById);
 app.get("/api/locations/:location_id/reviews", getReviewsByLocationId )

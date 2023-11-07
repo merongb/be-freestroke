@@ -41,9 +41,10 @@ const ReviewModel = mongoose.model('Review', new mongoose.Schema({
   uid: String,
   review_id: Number,
   username: String,
-  votes: Number,
+  votes_for_review: Number,
+  rating_for_location: Number,
   body: String,
-  created_at: Number,
+  created_at: String,
   location_id: Number,
 },
 { versionKey: false }

@@ -4,6 +4,7 @@ exports.selectReviewsByLocationId = (locationId) => {
     const ReviewModel = mongoose.model("Review");
 
     const numericLocationId = Number(locationId);
+
     if (isNaN(numericLocationId)) {
         return Promise.reject({ status: 400, message: "Bad Request" });
     }
@@ -17,4 +18,27 @@ exports.selectReviewsByLocationId = (locationId) => {
             }
             return reviews;
         });
+};
+
+exports.insertReview = (newReview, location_id, next) => {
+    const ReviewModel = mongoose.model("Review");
+
+    const { username, uid, body, rating_for_location } = newReview;
+    const votes_for_review = 0;
+    const created_at = new Date(Date.now())
+
+    const reviewDocument = new ReviewModel({
+        username,
+        uid,
+        body,
+        rating_for_location,
+        votes_for_review,
+        created_at,
+        location_id,
+    });
+
+    return reviewDocument.save()
+        .then((savedReview) => {
+            return savedReview;
+        })
 };

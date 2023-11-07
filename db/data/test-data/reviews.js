@@ -2,97 +2,109 @@ module.exports = [
     {
         uid: "LZcUD0th7Tay0l2d6ODkJ8Zfi7s1",
         username : "johndoe",
-        votes: 1,
+        votes_for_review: 0,
         body : "very cold but pretty safe otherwise",
         created_at: 1602205200000,
-        location_id: 1
+        location_id: 1,
+        rating_for_location: 5
     },
     {
         uid: "LZcUD0th7Tay0l2d6ODKJ8Zfi7s2",
         username: "janedoe",
-        votes: 2,
+        votes_for_review: 0,
         body: "Enjoyed the serene atmosphere. Great place to relax.",
         created_at: 1602205200000,
-        location_id: 2
+        location_id: 2,
+        rating_for_location: 4
     },
     {
         uid: "LZcUD0th7Tay0l2d6ODKJ8Zfi7s3",
         username: "adventureseeker",
-        votes: 0,
+        votes_for_review: 0,
         body: "Not the best spot for adventure, but beautiful nonetheless.",
         created_at: 1609885200000,
-        location_id: 3
+        location_id: 3,
+        rating_for_location: 3
     },
     {
         uid: "LZcUD0th7Tay0l2d6ODKJ8Zfi7s4",
         username: "outdoorlover",
-        votes: 1,
+        votes_for_review: 0,
         body: "Hiking trails in the area are fantastic!",
         created_at: 1617565200000,
-        location_id: 4
+        location_id: 4,
+        rating_for_location: 2
     },
     {
         uid: "LZcUD0th7Tay0l2d6ODKJ8Zfi7s5",
         username: "familyexplorer",
-        votes: 3,
+        votes_for_review: 0,
         body: "Perfect for a family day out with kids.",
         created_at: 1625245200000,
-        location_id: 5
+        location_id: 5,
+        rating_for_location: 1
     },
     {
         uid: "LZcUD0th7Tay0l2d6ODKJ8Zfi7s6",
         username: "natureenthusiast",
-        votes: 2,
+        votes_for_review: 0,
         body: "Wildlife sightings are common here.",
         created_at: 1632925200000,
-        location_id: 6
+        location_id: 6,
+        rating_for_location: 1
     },
     {
         uid: "LZcUD0th7Tay0l2d6ODKJ8Zfi7s7",
         username: "watersportslover",
-        votes: 4,
+        votes_for_review: 0,
         body: "Great place for water sports activities.",
         created_at: 1640605200000,
-        location_id: 7
+        location_id: 7,
+        rating_for_location: 5
     },
     {
         uid: "LZcUD0th7Tay0l2d6ODKJ8Zfi7s8",
         username: "beachbum",
-        votes: 1,
+        votes_for_review: 0,
         body: "The beach is pristine, perfect for sunbathing.",
         created_at: 1648285200000,
-        location_id: 8
+        location_id: 8,
+        rating_for_location: 5
     },
     {
         uid: "LZcUD0th7Tay0l2d6ODKJ8Zfi7s9",
         username: "photographer",
-        votes: 5,
+        votes_for_review: 0,
         body: "Photographer's paradise with stunning landscapes.",
         created_at: 1655965200000,
-        location_id: 9
+        location_id: 9,
+        rating_for_location: 5
     },
     {
         uid: "LZcUD0th7Tay0l2d6ODKJ8Zfi7s10",
         username: "romanticcouple",
-        votes: 2,
+        votes_for_review: 0,
         body: "A romantic getaway with breathtaking sunset views.",
         created_at: 1663645200000,
-        location_id: 10
+        location_id: 10,
+        rating_for_location: 5
     },
     {
         uid: "LZcUD0th7Tay0l2d6ODKJ8Zfi7s11",
         username: "adventurouscouples",
-        votes: 2,
+        votes_for_review: 0,
         body: "A fantastic spot for adventurous couples.",
         created_at: 1671325200000,
-        location_id: 11
+        location_id: 11,
+        rating_for_location: 5
     },
     {
         uid: "LZcUD0th7Tay0l2d6ODKJ8Zfi7s12",
         username: "travelbug",
-        votes: 3,
+        votes_for_review: 0,
         body: "Exotic location worth visiting.",
         created_at: 1679005200000,
-        location_id: 1
+        location_id: 1,
+        rating_for_location: 5
     }
 ]

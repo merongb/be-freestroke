@@ -63,10 +63,11 @@ describe("GET /api/locations/:location_id/reviews", () => {
           expect(body.reviews).toBeSorted({ descending: true, key: "created_at" });
           body.reviews.forEach((review) => {
             expect(review).toHaveProperty("username");
-            expect(review).toHaveProperty("votes");
+            expect(review).toHaveProperty("votes_for_review");
             expect(review).toHaveProperty("body");
             expect(review).toHaveProperty("created_at");
             expect(review).toHaveProperty("location_id");
+            expect(review).toHaveProperty("rating_for_location");
           });
         });
     });
@@ -90,3 +91,112 @@ test("should return a status code of 404 Not Found for a location_id that does n
         });
     });
   });
+
+describe('POST /api/location/:location_id/reviews', () => {
+    test('should return 201 status code and return the new posted review', () => {
+        const newReview = {
+                            username: "rogershop",
+                            uid: "LZcUD0th7Tay0l2d6ODkJ8Zfi7s1",
+                            body: "The water is too deep",
+                            rating_for_location: 3
+                        }
+        return request(app)
+        .post('/api/location/2/reviews')
+        .send(newReview)
+        .expect(201)
+        .then((res) => {
+            expect(res.body.review).toMatchObject({
+                                                    username: "rogershop",
+                                                    uid: "LZcUD0th7Tay0l2d6ODkJ8Zfi7s1",
+                                                    body: "The water is too deep",
+                                                    rating_for_location: 3,
+                                                    votes_for_review: 0,
+                                                    created_at: expect.any(String),
+                                                    location_id: 2
+                                                    })
+        })
+    });
+    test('should return 201 status code and return the new posted review when passed a request with an extra field', () => {
+        const newReview = {
+                            username: "rogershop",
+                            uid: "LZcUD0th7Tay0l2d6ODkJ8Zfi7s1",
+                            body: "The water is too deep",
+                            rating_for_location: 3,
+                            extraKey: 'extraValue'
+                            }
+        return request(app)
+        .post('/api/location/3/reviews')
+        .send(newReview)
+        .expect(201)
+        .then((res) => {
+            expect(res.body.review).toMatchObject({
+                                                    username: "rogershop",
+                                                    uid: "LZcUD0th7Tay0l2d6ODkJ8Zfi7s1",
+                                                    body: "The water is too deep",
+                                                    rating_for_location: 3,
+                                                    votes_for_review: 0,
+                                                    created_at: expect.any(String),
+                                                    location_id: 3
+                                                })
+        })
+    });
+    // test('should return 404 Not Found if given a location_id that does not exist',()=>{
+    //     const newReview = {
+    //                         username: "rogershop",
+    //                         uid: "LZcUD0th7Tay0l2d6ODkJ8Zfi7s1",
+    //                         body: "The water is too deep",
+    //                         rating_for_location: 3,
+    //                         }
+    //     return request(app)
+    //     .post('/api/location/999/reviews')
+    //     .send(newReview)
+    //     .expect(404)
+    //     .then((res) => {
+    //         expect(res.body.message).toBe('Not found')
+    //     })
+    // })
+    test('should return 400 Bad Request if given an invalid article_id',()=>{
+        const newReview = {
+                            username: "rogershop",
+                            uid: "LZcUD0th7Tay0l2d6ODkJ8Zfi7s1",
+                            body: "The water is too deep",
+                            rating_for_location: 3,
+                            }
+        return request(app)
+        .post('/api/location/notAnID/reviews')
+        .send(newReview)
+        .expect(400)
+        .then(({body})=>{
+            expect(body.message).toBe('Invalid ID')
+        })
+    })
+    // test.only('should return a 400 Bad Request if the object passed is incorrectly formatted - key is name rather than username',()=>{
+    //     const newReview = {
+    //                         name: "rogershop",
+    //                         uid: "LZcUD0th7Tay0l2d6ODkJ8Zfi7s1",
+    //                         body: "The water is too deep",
+    //                         rating_for_location: 3,
+    //                         }
+    //     return request(app)
+    //     .post('/api/location/1/reviews')
+    //     .send(newReview)
+    //     .expect(400)
+    //     .then ((res)=>{
+    //         expect(res.body.message).toBe('Bad request, request missing required columns')
+    //     })
+    // })
+    // test('should return a 400 Bad Request if the object passed is missing required properties - missing key uid',()=>{
+    //     const newReview = {
+    //                     username: "rogershop",
+    //                     body: "The water is too deep",
+    //                     rating_for_location: 3,
+    //                     }
+    //     return request(app)
+    //     .post('/api/location/1/reviews')
+    //     .send(newReview)
+    //     .expect(400)
+    //     .then ((res)=>{
+    //         expect(res.body.message).toBe('Bad request, request missing required columns')
+    //     })
+    // })
+})

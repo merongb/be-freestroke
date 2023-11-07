@@ -2,6 +2,7 @@ const { db } = require('../../connection');
 const mongoose = require('mongoose');
 const locationData = require('../data/test-data/locations')
 const reviewData = require('../data/test-data/reviews')
+const {convertReviewDateToISOString, convertLocationDateToISOString} = require('./utils.js')
 
 
 const locationIdCounterSchema = new mongoose.Schema({
@@ -61,9 +62,12 @@ function seedData(locationData, reviewData, LocationModel, ReviewModel) {
           ...location,
           location_id: index + 1,
       }))
+        const convertedLocationData = locationsWithIds.map(convertLocationDateToISOString)
+        const convertedReviewData = reviewData.map(convertReviewDateToISOString)
+
         return Promise.all([
-          LocationModel.insertMany(locationsWithIds),
-          ReviewModel.insertMany(reviewData),
+          LocationModel.insertMany(convertedLocationData),
+          ReviewModel.insertMany(convertedReviewData),
         ])
       }).catch((err) => {
         console.log(err);

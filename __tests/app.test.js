@@ -53,7 +53,6 @@ describe("GET /api/location/:location_id/reviews", () => {
           expect(body.reviews).toHaveLength(2);
           expect(body.reviews).toBeSorted({ descending: true, key: "created_at" });
           body.reviews.forEach((review) => {
-            expect(review).toHaveProperty("review_id");
             expect(review).toHaveProperty("username");
             expect(review).toHaveProperty("votes");
             expect(review).toHaveProperty("body");
@@ -63,14 +62,14 @@ describe("GET /api/location/:location_id/reviews", () => {
         });
     });
   
-    // test("should return a status code of 404 Not Found for a location_id that does not exist", () => {
-    //   return request(app)
-    //     .get("/api/location/99/reviews")
-    //     .expect(404)
-    //     .then(({ body }) => {
-    //       expect(body.message).toBe("Not Found");
-    //     });
-    // });
+test("should return a status code of 404 Not Found for a location_id that does not exist", () => {
+      return request(app)
+        .get("/api/location/99/reviews")
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.message).toBe("Not Found");
+        });
+    });
   
   
     test("should return a status code of 400 Bad Request for an invalid location_id", () => {

@@ -1,7 +1,6 @@
 module.exports = [
     {
         uid: "LZcUD0th7Tay0l2d6ODkJ8Zfi7s1",
-        review_id: 1,
         username : "johndoe",
         votes: 1,
         body : "very cold but pretty safe otherwise",
@@ -10,7 +9,6 @@ module.exports = [
     },
     {
         uid: "LZcUD0th7Tay0l2d6ODKJ8Zfi7s2",
-        review_id: 2,
         username: "janedoe",
         votes: 2,
         body: "Enjoyed the serene atmosphere. Great place to relax.",
@@ -19,7 +17,6 @@ module.exports = [
     },
     {
         uid: "LZcUD0th7Tay0l2d6ODKJ8Zfi7s3",
-        review_id: 3,
         username: "adventureseeker",
         votes: 0,
         body: "Not the best spot for adventure, but beautiful nonetheless.",
@@ -28,7 +25,6 @@ module.exports = [
     },
     {
         uid: "LZcUD0th7Tay0l2d6ODKJ8Zfi7s4",
-        review_id: 4,
         username: "outdoorlover",
         votes: 1,
         body: "Hiking trails in the area are fantastic!",
@@ -37,7 +33,6 @@ module.exports = [
     },
     {
         uid: "LZcUD0th7Tay0l2d6ODKJ8Zfi7s5",
-        review_id: 5,
         username: "familyexplorer",
         votes: 3,
         body: "Perfect for a family day out with kids.",
@@ -46,7 +41,6 @@ module.exports = [
     },
     {
         uid: "LZcUD0th7Tay0l2d6ODKJ8Zfi7s6",
-        review_id: 6,
         username: "natureenthusiast",
         votes: 2,
         body: "Wildlife sightings are common here.",
@@ -55,7 +49,6 @@ module.exports = [
     },
     {
         uid: "LZcUD0th7Tay0l2d6ODKJ8Zfi7s7",
-        review_id: 7,
         username: "watersportslover",
         votes: 4,
         body: "Great place for water sports activities.",
@@ -64,7 +57,6 @@ module.exports = [
     },
     {
         uid: "LZcUD0th7Tay0l2d6ODKJ8Zfi7s8",
-        review_id: 8,
         username: "beachbum",
         votes: 1,
         body: "The beach is pristine, perfect for sunbathing.",
@@ -73,7 +65,6 @@ module.exports = [
     },
     {
         uid: "LZcUD0th7Tay0l2d6ODKJ8Zfi7s9",
-        review_id: 9,
         username: "photographer",
         votes: 5,
         body: "Photographer's paradise with stunning landscapes.",
@@ -82,7 +73,6 @@ module.exports = [
     },
     {
         uid: "LZcUD0th7Tay0l2d6ODKJ8Zfi7s10",
-        review_id: 10,
         username: "romanticcouple",
         votes: 2,
         body: "A romantic getaway with breathtaking sunset views.",
@@ -91,7 +81,6 @@ module.exports = [
     },
     {
         uid: "LZcUD0th7Tay0l2d6ODKJ8Zfi7s11",
-        review_id: 11,
         username: "adventurouscouples",
         votes: 2,
         body: "A fantastic spot for adventurous couples.",
@@ -100,7 +89,6 @@ module.exports = [
     },
     {
         uid: "LZcUD0th7Tay0l2d6ODKJ8Zfi7s12",
-        review_id: 12,
         username: "travelbug",
         votes: 3,
         body: "Exotic location worth visiting.",

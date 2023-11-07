@@ -3,7 +3,16 @@ const mongoose = require('mongoose');
 const locationData = require('../data/test-data/locations')
 const reviewData = require('../data/test-data/reviews')
 
-const LocationModel = mongoose.model('Location', new mongoose.Schema({
+
+const locationIdCounterSchema = new mongoose.Schema({
+  location_id: {
+      type: Number,
+      default: 1,
+  },
+});
+
+const locationSchema = new mongoose.Schema({
+  location_id: Number,
   coordinates: [Number],
   created_at: Number,
   location_name: String,
@@ -15,7 +24,17 @@ const LocationModel = mongoose.model('Location', new mongoose.Schema({
   water_classification_date: String
 },
 { versionKey: false }
-));
+);
+
+const LocationModel = mongoose.model("Location", locationSchema)
+
+locationSchema.pre('save', async function (next) {
+  if (!this.location_id) {
+      const counter = await LocationIdCounter.findOneAndUpdate({}, { $inc: { location_id: 1 } }, { upsert: true })
+      this.location_id = counter.location_id
+  }
+  next()
+})
 
 const ReviewModel = mongoose.model('Review', new mongoose.Schema({
   uid: String,
@@ -38,8 +57,12 @@ function seedData(locationData, reviewData, LocationModel, ReviewModel) {
       ReviewModel.collection.drop(),
     ])
       .then(() => {
+        const locationsWithIds = locationData.map((location, index) => ({
+          ...location,
+          location_id: index + 1,
+      }))
         return Promise.all([
-          LocationModel.insertMany(locationData),
+          LocationModel.insertMany(locationsWithIds),
           ReviewModel.insertMany(reviewData),
         ])
       }).catch((err) => {

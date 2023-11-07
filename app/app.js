@@ -5,8 +5,8 @@ app.use(express.json())
 
 
 const {
-	getAllLocations
-
+	getAllLocations,
+    getLocationById
 } = require('../app/controllers/locations_controller');
 
 
@@ -17,7 +17,7 @@ const {
 
 // app.get("/api", getAllEndpoints);
 app.get("/api/locations", getAllLocations);
-// app.get("/api/locations/:location_id", getLocationById);
+app.get("/api/locations/:location_id", getLocationById);
 // app.get("/api/location/:location_id/reviews", getReviewsById )
 // app.post("/api/location/:location_id/reviews", postReview)
 // app.patch("/api/locations/:location_id", patchLocationById)
@@ -26,9 +26,12 @@ app.get("/api/locations", getAllLocations);
 // app.use(handleMongoErrors)
 // app.use(handleErrors)
 app.use((err, req, res, next) => {
+    if (err.status){
+        res.status(err.status).send({message: err.message})
+    } else {
         console.log(err);
         res.status(500).send({message: "Internal Server Error"})
-    
+    }
 })
 
 

@@ -25,3 +25,20 @@ describe('GET /api/locations', () => {
         return request(app).get("/api/banana").expect(404)
     });
 });
+
+describe('GET /api/locations/:location_id', () => {
+    test('returns a 200 status code', () => {
+        return request(app).get("/api/locations/9").expect(200)
+    }); 
+    test('returns a location by the id with the following properties', () => {
+        return request(app).get("/api/locations/9").expect(200).then(({body}) => {
+           expect(body.location).toHaveProperty("coordinates", expect.any(Array));
+           expect(body.location).toHaveProperty("location_name", expect.any(String));
+           expect(body.location).toHaveProperty("location_area", expect.any(String));
+           expect(body.location).toHaveProperty("location_img_url", expect.any(String));
+           expect(body.location).toHaveProperty("water_classification", expect.any(String));
+           expect(body.location).toHaveProperty("water_classification_date", expect.any(String));
+        })
+    });
+
+});

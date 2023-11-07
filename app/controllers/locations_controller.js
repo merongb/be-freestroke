@@ -1,5 +1,6 @@
 const {
-    selectAllLocations
+    selectAllLocations,
+    fetchLocationById
 } = require("../models/locations_model")
 
 exports.getAllLocations = (req, res, next) => {
@@ -9,4 +10,12 @@ exports.getAllLocations = (req, res, next) => {
     .catch((err) => {
         next(err)
     })
+}
+
+exports.getLocationById = (req, res, next) => {
+const {location_id} = req.params
+
+fetchLocationById(location_id).then((location) => {
+    res.status(200).send({ location })
+})
 }

@@ -1,4 +1,4 @@
-const { selectReviewsByLocationId } = require("../models/reviews_model");
+const { selectReviewsByLocationId , insertReview } = require("../models/reviews_model");
 
 
 exports.getReviewsByLocationId = (req, res, next) => {
@@ -9,10 +9,23 @@ exports.getReviewsByLocationId = (req, res, next) => {
     }
 
     selectReviewsByLocationId(locationId)
-        .then((reviews) => {
-            res.status(200).send({ reviews });
-        })
-        .catch((err) => {
-            next(err);
-        });
+    .then((reviews) => {
+        res.status(200).send({ reviews });
+    })
+    .catch((err) => {
+        next(err);
+    });
 };
+
+exports.postReview = (req, res, next) => {
+    const newReview = req.body
+    const { location_id } = req.params
+    
+    insertReview(newReview, location_id, next)
+    .then((review) => {
+        res.status(201).send({review})
+    })
+    .catch((err)=>{
+        next(err);
+    })
+}

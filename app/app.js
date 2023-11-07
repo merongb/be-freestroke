@@ -10,9 +10,7 @@ const {
 } = require('../app/controllers/locations_controller');
 
 
-
-
-// const { handleMongoErrors, handleErrors } = require("./db/error-handler");
+const { handleMongoErrors, handleErrors } = require("./error-handler");
 
 
 // app.get("/api", getAllEndpoints);

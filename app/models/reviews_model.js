@@ -42,3 +42,22 @@ exports.insertReview = (newReview, location_id, next) => {
             return savedReview;
         })
 };
+
+exports.removeReview = (review_id) => {
+    const ReviewModel = mongoose.model("Review");
+
+    const numericReviewId = Number(review_id);
+    
+    if (isNaN(numericReviewId)) {
+        return Promise.reject({ status: 400, message: "Bad Request" });
+    }
+
+    return ReviewModel
+        .findOneAndDelete({ review_id: numericReviewId })
+        .then((removedReview) => {
+            if (!removedReview) {
+                return Promise.reject({ status: 404, message: "Review not found" });
+            }
+            return removedReview
+        });
+};

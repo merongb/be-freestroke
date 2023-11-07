@@ -152,22 +152,7 @@ describe('POST /api/location/:location_id/reviews', () => {
                                                 })
         })
     });
-    // test('should return 404 Not Found if given a location_id that does not exist',()=>{
-    //     const newReview = {
-    //                         username: "rogershop",
-    //                         uid: "LZcUD0th7Tay0l2d6ODkJ8Zfi7s1",
-    //                         body: "The water is too deep",
-    //                         rating_for_location: 3,
-    //                         }
-    //     return request(app)
-    //     .post('/api/location/999/reviews')
-    //     .send(newReview)
-    //     .expect(404)
-    //     .then((res) => {
-    //         expect(res.body.message).toBe('Not found')
-    //     })
-    // })
-    test('should return 400 Bad Request if given an invalid article_id',()=>{
+    test('should return 400 Bad Request if given an invalid location_id',()=>{
         const newReview = {
                             username: "rogershop",
                             uid: "LZcUD0th7Tay0l2d6ODkJ8Zfi7s1",
@@ -179,36 +164,64 @@ describe('POST /api/location/:location_id/reviews', () => {
         .send(newReview)
         .expect(400)
         .then(({body})=>{
-            expect(body.message).toBe('Invalid ID')
+            expect(body.message).toBe('Bad request')
         })
     })
-    // test.only('should return a 400 Bad Request if the object passed is incorrectly formatted - key is name rather than username',()=>{
-    //     const newReview = {
-    //                         name: "rogershop",
-    //                         uid: "LZcUD0th7Tay0l2d6ODkJ8Zfi7s1",
-    //                         body: "The water is too deep",
-    //                         rating_for_location: 3,
-    //                         }
-    //     return request(app)
-    //     .post('/api/location/1/reviews')
-    //     .send(newReview)
-    //     .expect(400)
-    //     .then ((res)=>{
-    //         expect(res.body.message).toBe('Bad request, request missing required columns')
-    //     })
-    // })
-    // test('should return a 400 Bad Request if the object passed is missing required properties - missing key uid',()=>{
-    //     const newReview = {
-    //                     username: "rogershop",
-    //                     body: "The water is too deep",
-    //                     rating_for_location: 3,
-    //                     }
-    //     return request(app)
-    //     .post('/api/location/1/reviews')
-    //     .send(newReview)
-    //     .expect(400)
-    //     .then ((res)=>{
-    //         expect(res.body.message).toBe('Bad request, request missing required columns')
-    //     })
-    // })
+    test('should return a 400 Bad Request if the object passed is incorrectly formatted - key is name rather than username',()=>{
+        const newReview = {
+                            name: "rogershop",
+                            uid: "LZcUD0th7Tay0l2d6ODkJ8Zfi7s1",
+                            body: "The water is too deep",
+                            rating_for_location: 3,
+                            }
+        return request(app)
+        .post('/api/location/1/reviews')
+        .send(newReview)
+        .expect(400)
+        .then ((res)=>{
+            expect(res.body.message).toBe('Bad request')
+        })
+    })
+    test('should return a 400 Bad Request if the object passed is missing required properties - missing key uid',()=>{
+        const newReview = {
+                        username: "rogershop",
+                        body: "The water is too deep",
+                        rating_for_location: 3,
+                        }
+        return request(app)
+        .post('/api/location/1/reviews')
+        .send(newReview)
+        .expect(400)
+        .then ((res)=>{
+            expect(res.body.message).toBe('Bad request')
+        })
+    })
+})
+
+describe('DELETE /api/reviews/:review_id',()=>{
+    test('should return a 204 status code and no content - specified review_id should be deleted from reviews table',()=>{
+        return request(app)
+        .delete('/api/reviews/12')
+        .expect(204)
+        .then(()=>{
+            return ReviewModel.findOne({ review_id: 12 });
+            })
+            .then((foundReview) => {
+                expect(foundReview).toBeNull()
+        })
+    })
+    test('should return a 404 if given a review_id that does not exist',()=>{
+        return request(app)
+        .delete('/api/reviews/999')
+        .expect(404).then(({body})=>{
+            expect(body.message).toBe('Review not found')
+        })
+    })
+    test('should return a 400 if given an invalid review_id',()=>{
+        return request(app)
+        .delete('/api/reviews/notAnID')
+        .expect(400).then(({body})=>{
+            expect(body.message).toBe('Bad Request')
+        })
+    })
 })

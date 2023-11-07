@@ -1,4 +1,4 @@
-const { selectReviewsByLocationId , insertReview } = require("../models/reviews_model");
+const { selectReviewsByLocationId , insertReview, removeReview } = require("../models/reviews_model");
 
 
 exports.getReviewsByLocationId = (req, res, next) => {
@@ -27,5 +27,16 @@ exports.postReview = (req, res, next) => {
     })
     .catch((err)=>{
         next(err);
+    })
+}
+
+exports.deleteReview = (req,res,next) => {
+    const { review_id } = req.params
+
+    removeReview(review_id).then((review)=>{
+        res.status(204).send()
+    })
+    .catch((err)=>{
+        next(err)
     })
 }

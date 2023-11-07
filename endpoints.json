@@ -70,8 +70,8 @@
             }
         }
     },
-    "DELETE /api/locations/location_id/:review_id" : {
-        "description" : "Deletes a comment based on review_id"
+    "DELETE /api/reviews/:review_id" : {
+        "description" : "Deletes a comment based on review_id and returns no content"
     },
     "PATCH /api/reviews/review_id" : {
         "description" : "allows users to vote on reviews",

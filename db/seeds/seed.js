@@ -12,6 +12,13 @@ const locationIdCounterSchema = new mongoose.Schema({
   },
 });
 
+const ReviewIdCounterSchema = new mongoose.Schema({
+  review_id: {
+      type: Number,
+      default: 1,
+  },
+});
+
 const locationSchema = new mongoose.Schema({
   location_id: Number,
   coordinates: [Number],
@@ -37,10 +44,16 @@ locationSchema.pre('save', async function (next) {
   next()
 })
 
-const ReviewModel = mongoose.model('Review', new mongoose.Schema({
-  uid: String,
+const reviewSchema = new mongoose.Schema({
+  uid: {
+          type: String,
+          required: true,
+        },
   review_id: Number,
-  username: String,
+  username: {
+              type: String,
+              required: true,
+            },
   votes_for_review: Number,
   rating_for_location: Number,
   body: String,
@@ -48,7 +61,17 @@ const ReviewModel = mongoose.model('Review', new mongoose.Schema({
   location_id: Number,
 },
 { versionKey: false }
-))
+)
+
+const ReviewModel = mongoose.model('Review', reviewSchema)
+
+reviewSchema.pre('save', async function (next) {
+  if (!this.review_id) {
+      const counter = await ReviewIdCounter.findOneAndUpdate({}, { $inc: { review_id: 1 } }, { upsert: true })
+      this.review_id = counter.review_id
+  }
+  next()
+})
 
 
 function seedData(locationData, reviewData, LocationModel, ReviewModel) {
@@ -62,9 +85,13 @@ function seedData(locationData, reviewData, LocationModel, ReviewModel) {
         const locationsWithIds = locationData.map((location, index) => ({
           ...location,
           location_id: index + 1,
-      }))
+        }))
+        const reviewsWithIds = reviewData.map((review, index) => ({
+          ...review,
+          review_id: index + 1,
+        }))
         const convertedLocationData = locationsWithIds.map(convertLocationDateToISOString)
-        const convertedReviewData = reviewData.map(convertReviewDateToISOString)
+        const convertedReviewData = reviewsWithIds.map(convertReviewDateToISOString)
 
         return Promise.all([
           LocationModel.insertMany(convertedLocationData),

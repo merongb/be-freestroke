@@ -6,11 +6,23 @@ const { LocationModel, ReviewModel } = require("../db/seeds/seed");
 const {locationsData, reviewsData} = require("../db/data/test-data/index");
 const sorted = require("jest-sorted");
 const mongoose = require("mongoose");
+const endpoints = require("../endpoints.json");
 
 
 beforeEach(async () => await seedData(locationsData, reviewsData, LocationModel, ReviewModel));
 
 afterAll(() => mongoose.connection.close());
+
+describe("GET /api", () => {
+	test("should return all api endpoints with descriptions from endpoints.json", () => {
+		return request(app)
+			.get("/api")
+			.expect(200)
+			.then(({ body }) => {
+				expect(body).toEqual(endpoints);
+			});
+	});
+});
 
 describe('GET /api/locations', () => {
     test('should return a 200 status code ', () => {

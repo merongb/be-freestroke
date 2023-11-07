@@ -42,3 +42,42 @@ describe('GET /api/locations/:location_id', () => {
     });
 
 });
+
+describe("GET /api/location/:location_id/reviews", () => {
+    test("should return a status code of 200 with an array of reviews for the given location_id, ordered by latest", () => {
+      return request(app)
+        .get("/api/location/1/reviews")
+        .expect(200)
+        .then(({ body }) => {
+          expect(Array.isArray(body.reviews)).toBe(true);
+          expect(body.reviews).toHaveLength(2);
+          expect(body.reviews).toBeSorted({ descending: true, key: "created_at" });
+          body.reviews.forEach((review) => {
+            expect(review).toHaveProperty("username");
+            expect(review).toHaveProperty("votes");
+            expect(review).toHaveProperty("body");
+            expect(review).toHaveProperty("created_at");
+            expect(review).toHaveProperty("location_id");
+          });
+        });
+    });
+  
+test("should return a status code of 404 Not Found for a location_id that does not exist", () => {
+      return request(app)
+        .get("/api/location/99/reviews")
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.message).toBe("Not Found");
+        });
+    });
+  
+  
+    test("should return a status code of 400 Bad Request for an invalid location_id", () => {
+      return request(app)
+        .get("/api/location/nolocation/reviews")
+        .expect(400)
+        .then(({ body }) => {
+          expect(body.message).toBe("Bad Request");
+        });
+    });
+  });

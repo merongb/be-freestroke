@@ -24,6 +24,7 @@ const locationSchema = new mongoose.Schema({
   coordinates: [Number],
   created_at: Number,
   location_name: String,
+  distance_from_user_km: Number,
   location_area: String,
   location_img_url: String,
   body: String,

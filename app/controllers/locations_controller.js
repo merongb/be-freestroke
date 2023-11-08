@@ -1,11 +1,14 @@
 const {
-    selectAllLocations,
+    fetchAllLocations,
     fetchLocationById
 } = require("../models/locations_model")
 
 exports.getAllLocations = (req, res, next) => {
-    selectAllLocations().then((locations) => {
-        res.status(200).send({locations})
+    const { distance, sort_by, order, limit, p } = req.query
+
+    fetchAllLocations(distance, sort_by, order, limit, p)
+    .then(({ locations, total_count}) => {
+        res.status(200).send({locations, total_count})
     })
     .catch((err) => {
         next(err)

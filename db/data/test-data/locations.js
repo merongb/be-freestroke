@@ -1,16 +1,18 @@
 module.exports = [
     {
         coordinates : [53.4084,  2.9916],
+        distance_from_user_km: 2,
         created_at: null,
         location_name: "Test lake spot",
         location_area: "Merseyside",
         water_classification: 'excellent',
         water_classification_date: "2023-09-24T12:15:00",
         location_img_url: "http://environment.data.gov.uk/media/image/bathing-water-profile/ukc2102-03600_1-webres.jpg",
-        body: "Spittal Beach is a gently sloping resort beach approximately one kilometre long situated immediately south of the mouth of the River Tweed."
+        body: "Spittal Beach is a gently sloping resort beach approximately one kilometre long situated immediately south of the mouth of the River Tweed.",
     },
     {
         coordinates: [50.8267, -0.1384],
+        distance_from_user_km: 1,
         created_at: null,
         location_name: "Brighton Beach",
         location_area: "East Sussex",
@@ -21,6 +23,7 @@ module.exports = [
     },
     {
         coordinates: [51.4656, -3.1664],
+        distance_from_user_km: 1.5,
         created_at: null,
         location_name: "Barry Island",
         location_area: "Vale of Glamorgan",
@@ -31,6 +34,7 @@ module.exports = [
     },
     {
         coordinates: [53.4740, -2.2436],
+        distance_from_user_km: 3.5,
         created_at: null,
         location_name: "Liverpool Docks",
         location_area: "Merseyside",
@@ -41,6 +45,7 @@ module.exports = [
     },
     {
         coordinates: [55.9533, -3.1883],
+        distance_from_user_km: 6,
         created_at: null,
         location_name: "Portobello Beach",
         location_area: "Edinburgh",
@@ -51,6 +56,7 @@ module.exports = [
     },
     {
         coordinates: [51.4415, -2.4756],
+        distance_from_user_km: 7,
         created_at: null,
         location_name: "Weston-super-Mare",
         location_area: "Somerset",
@@ -61,6 +67,7 @@ module.exports = [
     },
     {
         coordinates: [53.4808, -2.2426],
+        distance_from_user_km: 0.5,
         created_at: null,
         location_name: "Albert Dock",
         location_area: "Liverpool",
@@ -71,6 +78,7 @@ module.exports = [
     },
     {
         coordinates: [50.7192, -1.8795],
+        distance_from_user_km: 53,
         created_at: null,
         location_name: "Bournemouth Beach",
         location_area: "Dorset",
@@ -81,6 +89,7 @@ module.exports = [
     },
     {
         coordinates: [51.6214, -3.9436],
+        distance_from_user_km: 10,
         created_at: null,
         location_name: "Swansea Bay",
         location_area: "Swansea",

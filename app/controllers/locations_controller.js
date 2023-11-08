@@ -1,12 +1,11 @@
-const {
-    selectAllLocations,
-    fetchLocationById,
-    insertLocation
-} = require("../models/locations_model")
+const { fetchAllLocations, fetchLocationById, insertLocation } = require("../models/locations_model")
 
 exports.getAllLocations = (req, res, next) => {
-    selectAllLocations().then((locations) => {
-        res.status(200).send({locations})
+    const { distance, sort_by, order, limit, p } = req.query
+
+    fetchAllLocations(distance, sort_by, order, limit, p)
+    .then(({ locations, total_count}) => {
+        res.status(200).send({locations, total_count})
     })
     .catch((err) => {
         next(err)

@@ -37,6 +37,43 @@ describe('GET /api/locations', () => {
         return request(app).get("/api/banana").expect(404).then(({body}) => {
         })
     });
+    test('should filter locations based on distance_from_user_km', () => {
+        return request(app)
+            .get('/api/locations?distance=5')
+            .expect(200)
+            .then(({ body }) => {
+                expect(Array.isArray(body.locations)).toBe(true);
+                expect(body.locations).toHaveLength(5);
+            });
+    });
+    test('should sort locations by created_at in descending order', () => {
+        return request(app)
+            .get('/api/locations?sort_by=created_at&order=desc')
+            .expect(200)
+            .then(({ body }) => {
+                expect(Array.isArray(body.locations)).toBe(true);
+                expect(body.locations).toBeSortedBy('created_at', {descending: true})
+            });
+    });
+    test('should limit the number of locations returned', () => {
+        return request(app)
+            .get('/api/locations?limit=3')
+            .expect(200)
+            .then(({ body }) => {
+                expect(Array.isArray(body.locations)).toBe(true);
+                expect(body.locations).toHaveLength(3);
+            });
+    });
+    test('should paginate results', () => {
+        return request(app)
+            .get('/api/locations?limit=3&p=2')
+            .expect(200)
+            .then(({ body }) => {
+                expect(Array.isArray(body.locations)).toBe(true);
+                expect(body.locations).toHaveLength(3);
+                expect(body.total_count).toBe(9)
+            });
+    });
 });
 
 describe('GET /api/locations/:location_id', () => {
@@ -45,23 +82,22 @@ describe('GET /api/locations/:location_id', () => {
     }); 
     test('returns a location by the id with the following properties', () => {
         return request(app).get("/api/locations/9").expect(200).then(({body}) => {
-           expect(body.location[0]).toHaveProperty("coordinates", expect.any(Array));
-           expect(body.location[0]).toHaveProperty("location_name", expect.any(String));
-           expect(body.location[0]).toHaveProperty("location_area", expect.any(String));
-           expect(body.location[0]).toHaveProperty("location_img_url", expect.any(String));
-           expect(body.location[0]).toHaveProperty("water_classification", expect.any(String));
-           expect(body.location[0]).toHaveProperty("water_classification_date", expect.any(String));
-        })
-    });
+            expect(body.location[0]).toHaveProperty("coordinates", expect.any(Array));
+            expect(body.location[0]).toHaveProperty("location_name", expect.any(String));
+            expect(body.location[0]).toHaveProperty("location_area", expect.any(String));
+            expect(body.location[0]).toHaveProperty("location_img_url", expect.any(String));
+            expect(body.location[0]).toHaveProperty("water_classification", expect.any(String));
+            expect(body.location[0]).toHaveProperty("water_classification_date", expect.any(String));
+            })
+        });
     test("should return a status code of 404 Not Found for a location_id that does not exist", () => {
         return request(app)
-          .get("/api/locations/99")
-          .expect(404)
-          .then(({ body }) => {
-            expect(body.message).toBe('Location Does Not Exist!')
-          });
-      });
-
+            .get("/api/locations/99")
+            .expect(404)
+            .then(({ body }) => {
+                expect(body.message).toBe('Location Does Not Exist!')
+            });
+    });
 });
 
 describe("GET /api/locations/:location_id/reviews", () => {
@@ -369,7 +405,6 @@ describe('POST /api/locations', () => {
       created_at: new Date()
     }
     return request(app).post(`/api/locations`).send(newLocation).expect(201).then(({body}) => {
-      console.log(body);
       expect(body.location).toHaveProperty("location_name", expect.any(String));
       expect(body.location).toHaveProperty("location_area", expect.any(String));
       expect(body.location).toHaveProperty("body", expect.any(String));

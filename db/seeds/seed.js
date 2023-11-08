@@ -25,6 +25,7 @@ const locationSchema = new mongoose.Schema({
     type: [Number],
     required: true },
   created_at: Number,
+  distance_from_user_km: Number,
   location_name: { 
     type: String,
     required: true },

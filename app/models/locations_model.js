@@ -1,13 +1,27 @@
 const mongoose = require('mongoose')
 
-exports.selectAllLocations = () => {
+exports.fetchAllLocations = (distance, sort_by = 'created_at', order = 'desc', limit = 10, p = 1) => {
     const LocationModel = mongoose.model("Location")
+    const offset = (p - 1) * limit
+    const query = LocationModel.find({});
 
-    return LocationModel.find({})
-    .then((locations) => {
-        return locations
-    })
-}
+    if (distance) {
+        query.where('distance_from_user_km').lte(distance);
+    }
+
+    return Promise.all([
+        query
+            .sort({ [sort_by]: order }) 
+            .skip(offset) 
+            .limit(limit)
+            .exec(),
+        LocationModel.countDocuments(query.getQuery()), 
+    ])
+        .then(([locations, totalCount]) => {
+            const output = { locations, total_count: totalCount };
+            return output;
+        });
+};
 
 exports.fetchLocationById = (location_id) => {
 const LocationModel = mongoose.model("Location")

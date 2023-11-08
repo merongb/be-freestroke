@@ -28,6 +28,12 @@ function dropAndCreateTestDatabase() {
 
   dropAndCreateTestDatabase()
 
+  const config = {};
+
+  if (ENV === 'production') {
+    config.connectionString = process.env.DATABASE_URL
+  }
+
   module.exports = {
     db: mongoose.connection,
     dropAndCreateTestDatabase,

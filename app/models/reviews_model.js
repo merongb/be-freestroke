@@ -1,22 +1,29 @@
 const mongoose = require("mongoose");
 
-exports.selectReviewsByLocationId = (locationId) => {
+exports.fetchReviewsForLocation = (location_id, limit=10, p=1) => {
     const ReviewModel = mongoose.model("Review");
 
-    const numericLocationId = Number(locationId);
+    const numericLocationId = Number(location_id);
+    const offset = (p - 1) * limit
 
-    if (isNaN(numericLocationId)) {
+    if (isNaN(numericLocationId) || isNaN(offset)) {
         return Promise.reject({ status: 400, message: "Bad Request" });
     }
 
-    return ReviewModel
-        .find({ location_id: numericLocationId })
-        .sort({ created_at: -1 }) 
-        .then((reviews) => {
-            if (reviews.length === 0) {
-                return Promise.reject({ status: 404, message: "Not Found" });
-            }
-            return reviews;
+    const query = ReviewModel
+    .find({ location_id: numericLocationId })
+    .sort({ created_at: -1 })
+    .skip(offset)
+    .limit(limit);
+
+    return Promise.all([
+        query.exec(),
+        ReviewModel.countDocuments({ location_id: numericLocationId }),
+        
+    ])
+        .then(([reviews, totalCount]) => {
+        const output = { reviews: reviews, total_count: totalCount };
+        return output;
         });
 };
 

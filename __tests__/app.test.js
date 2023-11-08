@@ -66,43 +66,104 @@ describe('GET /api/locations/:location_id', () => {
 
 describe("GET /api/locations/:location_id/reviews", () => {
     test("should return a status code of 200 with an array of reviews for the given location_id, ordered by latest", () => {
-      return request(app)
-        .get("/api/locations/1/reviews")
+        return request(app)
+            .get("/api/locations/1/reviews")
+            .expect(200)
+            .then(({ body }) => {
+            expect(Array.isArray(body.reviews)).toBe(true);
+            expect(body.reviews).toHaveLength(2);
+            expect(body.reviews).toBeSorted({ descending: true, key: "created_at" });
+            body.reviews.forEach((review) => {
+                expect(review).toHaveProperty("username");
+                expect(review).toHaveProperty("votes_for_review");
+                expect(review).toHaveProperty("body");
+                expect(review).toHaveProperty("created_at");
+                expect(review).toHaveProperty("location_id");
+                expect(review).toHaveProperty("rating_for_location");
+            });
+            });
+    });
+    test('should return 200 status code and an empty array for valid location with no reviews', () => {
+        return request(app)
+        .get('/api/locations/6/reviews')
         .expect(200)
-        .then(({ body }) => {
-          expect(Array.isArray(body.reviews)).toBe(true);
-          expect(body.reviews).toHaveLength(2);
-          expect(body.reviews).toBeSorted({ descending: true, key: "created_at" });
-          body.reviews.forEach((review) => {
-            expect(review).toHaveProperty("username");
-            expect(review).toHaveProperty("votes_for_review");
-            expect(review).toHaveProperty("body");
-            expect(review).toHaveProperty("created_at");
-            expect(review).toHaveProperty("location_id");
-            expect(review).toHaveProperty("rating_for_location");
-          });
+        .then(({body}) => {
+            expect(body.reviews).toHaveLength(0)
+            expect(body.reviews).toEqual([])
+        })
+    })
+    test("should return a status code of 404 Not Found for a location_id that does not exist", () => {
+        return request(app)
+            .get("/api/locations/99/reviews")
+            .expect(404)
+            .then(({ body }) => {
+            expect(body.message).toBe("Location Does Not Exist!");
+            });
         });
-    });
-  
-test("should return a status code of 404 Not Found for a location_id that does not exist", () => {
-      return request(app)
-        .get("/api/locations/99/reviews")
-        .expect(404)
-        .then(({ body }) => {
-          expect(body.message).toBe("Not Found");
-        });
-    });
-  
-  
     test("should return a status code of 400 Bad Request for an invalid location_id", () => {
-      return request(app)
-        .get("/api/locations/nolocation/reviews")
-        .expect(400)
-        .then(({ body }) => {
-          expect(body.message).toBe("Bad Request");
+        return request(app)
+            .get("/api/locations/nolocation/reviews")
+            .expect(400)
+            .then(({ body }) => {
+            expect(body.message).toBe("Bad Request");
+            });
         });
+    test('checking limit parameter: should return an object with accurate list of comments and total_count - limit=2, page=default(1)', () => {
+        return request(app)
+        .get('/api/locations/1/reviews?limit=2')
+        .expect(200)
+        .then((res) => {
+            expect(res.body.total_count).toBe(2)
+            expect(res.body.reviews).toMatchObject([{
+                                                        _id: expect.any(String),
+                                                        body: "Exotic location worth visiting.",
+                                                        created_at: "Thu Mar 16 2023 22:20:00 GMT+0000 (Greenwich Mean Time)",
+                                                        location_id: 1,
+                                                        rating_for_location: 5,
+                                                        review_id: 12,
+                                                        uid: "LZcUD0th7Tay0l2d6ODKJ8Zfi7s12",
+                                                        username: "travelbug",
+                                                        votes_for_review: 0
+                                                    },
+                                                    {
+                                                        _id: expect.any(String),
+                                                        body: "very cold but pretty safe otherwise",
+                                                        created_at: "Fri Oct 09 2020 02:00:00 GMT+0100 (British Summer Time)",
+                                                        location_id: 1,
+                                                        rating_for_location: 5,
+                                                        review_id: 1,
+                                                        uid: "LZcUD0th7Tay0l2d6ODkJ8Zfi7s1",
+                                                        username: "johndoe",
+                                                        votes_for_review: 0
+                                                    }])
+            })
+        });
+    test('should return empty reviews array when page entered is higher than number of reviews that we have for that location', async () => {
+        return request(app)
+        .get('/api/locations/1/reviews?p=5')
+        .expect(200)
+        .then((res) => {
+            expect(res.body.total_count).toBe(2)
+            expect(res.body.reviews).toMatchObject([])
+        })
     });
-  });
+    test('should return 400 Bad Request when limit parameter is invalid', async () => {
+        return request(app)
+        .get('/api/locations/1/reviews?limit=invalid')
+        .expect(400)
+        .then((res) => {
+            expect(res.body.message).toBe('Bad Request');
+        })
+    });
+    test('should return 400 Bad Request when pagination parameter is invalid', async () => {
+        return request(app)
+        .get('/api/locations/1/reviews?p=invalid')
+        .expect(400)
+        .then((res) => {
+            expect(res.body.message).toBe('Bad Request');
+        })
+    });
+});
 
 describe('POST /api/location/:location_id/reviews', () => {
     test('should return 201 status code and return the new posted review', () => {

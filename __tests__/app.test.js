@@ -369,6 +369,7 @@ describe('POST /api/locations', () => {
       created_at: new Date()
     }
     return request(app).post(`/api/locations`).send(newLocation).expect(201).then(({body}) => {
+      console.log(body);
       expect(body.location).toHaveProperty("location_name", expect.any(String));
       expect(body.location).toHaveProperty("location_area", expect.any(String));
       expect(body.location).toHaveProperty("body", expect.any(String));

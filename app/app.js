@@ -1,6 +1,6 @@
 const express = require("express")
 const { getAllEndpoints } = require('../app/controllers/endpoints_controller')
-const {	getAllLocations,getLocationById} = require('../app/controllers/locations_controller');
+const {	getAllLocations,getLocationById, postLocation} = require('../app/controllers/locations_controller');
 const {	getReviewsByLocationId, postReview, patchVotesByReviewId, deleteReview } = require("../app/controllers/reviews_controller");
 const { handleMongoErrors, handleErrors } = require("./error-handler");
 
@@ -14,6 +14,7 @@ app.get("/api/locations/:location_id/reviews", getReviewsByLocationId )
 app.post("/api/location/:location_id/reviews", postReview)
 app.patch("/api/reviews/:review_id", patchVotesByReviewId)
 app.delete("/api/reviews/:review_id", deleteReview)
+app.post("/api/locations", postLocation)
 
 app.all("/*", (req, res) => {
     res.status(404).send({ message: "Not found" });

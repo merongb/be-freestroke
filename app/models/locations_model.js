@@ -22,3 +22,26 @@ return LocationModel.find({ location_id })
 
         
 }
+
+exports.insertLocation = (newLocation) => {
+    const LocationModel = mongoose.model("Location")
+
+    const {coordinates, location_name, location_area, body, location_img_url,username, uid,  } = newLocation
+    const created_at = new Date(Date.now())
+
+    const location = new LocationModel({
+        username,
+        uid,
+        coordinates: coordinates,
+        location_name: location_name,
+        location_area: location_area,
+        body: body,
+        location_img_url: location_img_url,
+        created_at,
+      })
+
+      return location.save()
+      .then((savedLocation) => {
+        return savedLocation
+      })
+}

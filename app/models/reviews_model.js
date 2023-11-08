@@ -68,3 +68,25 @@ exports.removeReview = (review_id) => {
             return removedReview
         });
 };
+
+
+exports.updateReviewVotes = (reviewId, voteChange) => {
+    const ReviewModel = mongoose.model("Review");
+    const numericVoteChange = Number(voteChange);
+
+    if (isNaN(numericVoteChange)) {
+        return Promise.reject({ status: 400, message: "Bad Request" });
+    }
+
+    return ReviewModel.findOneAndUpdate(
+        { review_id: reviewId },
+        { $inc: { votes_for_review: numericVoteChange } },
+        { new: true }
+    )
+    .then((review) => {
+        if (!review) {
+            return Promise.reject({ status: 404, message: "Not Found" });
+        }
+        return review;
+    });
+}

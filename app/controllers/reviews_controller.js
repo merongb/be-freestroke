@@ -1,5 +1,5 @@
-const { fetchReviewsForLocation , insertReview, removeReview } = require("../models/reviews_model");
 const { fetchLocationById } = require('../models/locations_model')
+const { fetchReviewsForLocation , insertReview, updateReviewVotes, removeReview } = require("../models/reviews_model");
 
 exports.getReviewsByLocationId = (req, res, next) => {
     const location_id = req.params.location_id;
@@ -38,6 +38,20 @@ exports.postReview = (req, res, next) => {
         next(err);
     })
 }
+
+exports.patchVotesByReviewId = (req, res, next) => {
+    
+    const { review_id } = req.params;
+    const { inc_votes } = req.body;
+
+    updateReviewVotes(review_id, inc_votes)
+        .then((review) => {
+            res.status(200).send({ review });
+        })
+		.catch((err) => {
+			next(err);
+		});
+};
 
 exports.deleteReview = (req,res,next) => {
     const { review_id } = req.params

@@ -259,6 +259,77 @@ describe('POST /api/location/:location_id/reviews', () => {
     })
 })
 
+describe("PATCH /api/reviews/:review_id", () => {
+	test("should return status code 200 and update votes to specified amount (incremented)", () => {
+		const votesBody = { inc_votes: 1 };
+		return request(app)
+			.patch("/api/reviews/12")
+			.send(votesBody)
+			.expect(200)
+			.then(({ body }) => {
+				expect(body.review).toHaveProperty("review_id");
+				expect(body.review).toHaveProperty("username");
+				expect(body.review).toHaveProperty("votes_for_review");
+				expect(body.review).toHaveProperty("body");
+				expect(body.review).toHaveProperty("created_at");
+				expect(body.review).toHaveProperty("location_id");
+				expect(body.review).toHaveProperty("rating_for_location");
+				expect(body.review.votes_for_review).toEqual(1);
+			});
+	});
+
+	test("should return status code 200 and update review votes to specified amount (decremented)", () => {
+		const votesBody = { inc_votes: -1 };
+		return request(app)
+			.patch("/api/reviews/12")
+			.send(votesBody)
+			.expect(200)
+			.then(({ body }) => {
+				expect(body.review).toHaveProperty("review_id");
+				expect(body.review).toHaveProperty("username");
+				expect(body.review).toHaveProperty("votes_for_review");
+				expect(body.review).toHaveProperty("body");
+				expect(body.review).toHaveProperty("created_at");
+				expect(body.review).toHaveProperty("location_id");
+				expect(body.review).toHaveProperty("rating_for_location");
+				expect(body.review.votes_for_review).toEqual(-1);
+			});
+	});
+
+	test("should return status code 400 when the vote value is not a number", () => {
+		const votesBody = { inc_votes: "abc" };
+		return request(app)
+			.patch("/api/reviews/12")
+			.send(votesBody)
+			.expect(400)
+			.then(({ body }) => {
+				expect(body.message).toBe("Bad Request");
+			});
+	});
+
+	test('should return status code 404 for a review_id that doesn"t exist', () => {
+		const votesBody = { inc_votes: 5 };
+		return request(app)
+			.patch("/api/reviews/99")
+			.send(votesBody)
+			.expect(404)
+			.then(({ body }) => {
+				expect(body.message).toBe("Not Found");
+			});
+	});
+
+	test("should return status code 400 for an invalid review_id", () => {
+		const votesBody = { inc_votes: 3 };
+		return request(app)
+			.patch("/api/reviews/rubbish")
+			.send(votesBody)
+			.expect(400)
+			.then(({ body }) => {
+				expect(body.message).toBe("Bad Request");
+			});
+	});
+});
+
 describe('DELETE /api/reviews/:review_id',()=>{
     test('should return a 204 status code and no content - specified review_id should be deleted from reviews table',()=>{
         return request(app)

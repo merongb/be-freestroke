@@ -21,13 +21,22 @@ const ReviewIdCounterSchema = new mongoose.Schema({
 
 const locationSchema = new mongoose.Schema({
   location_id: Number,
-  coordinates: [Number],
+  coordinates: {
+    type: [Number],
+    required: true },
   created_at: Number,
-  location_name: String,
   distance_from_user_km: Number,
-  location_area: String,
+  location_name: { 
+    type: String,
+    required: true },
+  location_area: { 
+    type: String,
+    required: true },
   location_img_url: String,
-  body: String,
+  body: {
+    type: String,
+    required: true
+  },
   review_count: Number,
   water_classification: String,
   water_classification_date: String

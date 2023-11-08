@@ -393,3 +393,40 @@ describe('DELETE /api/reviews/:review_id',()=>{
         })
     })
 })
+describe('POST /api/locations', () => {
+  test('returns a 201 status code and the posted location ', () => {
+    const newLocation = 
+    {
+      coordinates: [50.1111, -1.2222],
+      location_name: "Brighton square",
+      location_area: "Brighton",
+      body: "Just a random place in brighton",
+      location_img_url: "https://media.istockphoto.com/id/518181226/photo/brighton-ferris-wheel-beachfront-panoramic-view.jpg?s=612x612&w=0&k=20&c=d_itIAgf5mv1PtDHGTak0HMRQl0ANZBKUFBoWrDnG8k=",
+      created_at: new Date()
+    }
+    return request(app).post(`/api/locations`).send(newLocation).expect(201).then(({body}) => {
+      console.log(body);
+      expect(body.location).toHaveProperty("location_name", expect.any(String));
+      expect(body.location).toHaveProperty("location_area", expect.any(String));
+      expect(body.location).toHaveProperty("body", expect.any(String));
+      expect(body.location).toHaveProperty("location_img_url", expect.any(String));
+      expect(body.location).toHaveProperty("created_at", expect.any(Number));
+    })
+  });
+  test('returns a 400 when given wrong data inputs', () => {
+    const newLocation = 
+    {
+      coordinates: [50.1111, -1.2222],
+      location_name: "Brighton square",
+      location_area: 123,
+      body: 1234,
+      location_img_url: 123,
+      created_at: new Date()
+    }
+    return request(app).post(`/api/locations`).send(newLocation).expect(400).then(({body}) => {
+      expect(body.message).toBe("Bad Request")
+    })
+  });
+  
+
+});

@@ -1,7 +1,6 @@
 const { db } = require('../../connection');
 const mongoose = require('mongoose');
-const locationData = require('../data/test-data/locations')
-const reviewData = require('../data/test-data/reviews')
+
 const {convertReviewDateToISOString, convertLocationDateToISOString} = require('./utils.js')
 
 
@@ -11,6 +10,7 @@ const locationIdCounterSchema = new mongoose.Schema({
       default: 1,
   },
 });
+const locationIdCounterModel = mongoose.model("Location_id", locationIdCounterSchema)
 
 const ReviewIdCounterSchema = new mongoose.Schema({
   review_id: {
@@ -84,10 +84,8 @@ reviewSchema.pre('save', async function (next) {
 })
 
 
-function seedData(locationData, reviewData, LocationModel, ReviewModel) {
-    
+function seedData({locationData, reviewData}, LocationModel, ReviewModel) {
     return Promise.all([
-      
       LocationModel.collection.drop(),
       ReviewModel.collection.drop(),
     ])
@@ -113,4 +111,4 @@ function seedData(locationData, reviewData, LocationModel, ReviewModel) {
 
   }
   
-  module.exports = { LocationModel, ReviewModel, seedData }
+  module.exports = { LocationModel, ReviewModel, seedData, locationIdCounterModel }

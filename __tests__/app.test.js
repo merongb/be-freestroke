@@ -3,13 +3,13 @@ const app = require("../app/app");
 const db = require("../connection");
 const {seedData} = require("../db/seeds/seed");
 const { LocationModel, ReviewModel } = require("../db/seeds/seed");
-const {locationsData, reviewsData} = require("../db/data/test-data/index");
+const {locationData, reviewData} = require("../db/data/test-data/index");
 const sorted = require("jest-sorted");
 const mongoose = require("mongoose");
 const endpoints = require("../endpoints.json");
 
 
-beforeEach(async () => await seedData(locationsData, reviewsData, LocationModel, ReviewModel));
+beforeEach(async () => await seedData({locationData, reviewData}, LocationModel, ReviewModel));
 
 afterAll(() => mongoose.connection.close());
 

@@ -43,19 +43,27 @@ exports.insertLocation = (newLocation) => {
     const {coordinates, location_name, location_area, body, location_img_url,username, uid,  } = newLocation
     const created_at = new Date(Date.now())
 
+
+    return LocationModel.findOne({}, { location_id: 1 }, { sort: { location_id: -1 } })
+    .then((maxLocation) => {
+        const newLocationId = maxLocation ? maxLocation.location_id + 1 : 1;
+
+
     const location = new LocationModel({
         username,
         uid,
-        coordinates: coordinates,
-        location_name: location_name,
-        location_area: location_area,
-        body: body,
-        location_img_url: location_img_url,
+        coordinates,
+        location_name,
+        location_area,
+        body,
+        location_img_url,
         created_at,
-      })
+        location_id: newLocationId
+    });
 
       return location.save()
       .then((savedLocation) => {
         return savedLocation
       })
+    })
 }

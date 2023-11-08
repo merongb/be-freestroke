@@ -1,7 +1,6 @@
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
-const cron = require('node-cron')
 
 const allSwimSpotsAPI = axios.create({ baseURL: 'https://environment.data.gov.uk/doc/bathing-water?_pageSize=500' });
 
@@ -18,6 +17,7 @@ const getCoastalSpots = async () => {
         const formattedItem = {
             coordinates: [item.samplingPoint.long, item.samplingPoint.lat],
             created_at: null,
+            distance_from_user_km: null,
             location_name: item.name._value,
             location_area: item.district[0].name._value,
             water_classification: item.latestComplianceAssessment
@@ -29,16 +29,13 @@ const getCoastalSpots = async () => {
         };
         formattedData.push(formattedItem);
         const jsonData = JSON.stringify(formattedData, null, 2);
-        const filePath = path.join(process.cwd(), 'db/data/development-data/swim_api_locations.js');
+        const filePath = path.join(process.cwd(), 'db/data/development-data/locations.js');
 
         fs.writeFileSync(filePath, jsonData);
     }
     return formattedData
 }
 
-cron.schedule('0 0 * * 1', async () => {
-    console.log('Scheduled update started.');
-    await getCoastalSpots();
-});
+
 
 getCoastalSpots();

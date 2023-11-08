@@ -50,7 +50,7 @@ module.exports = [
         votes_for_review: 0,
         body: "Wildlife sightings are common here.",
         created_at: 1632925200000,
-        location_id: 6,
+        location_id: 5,
         rating_for_location: 1
     },
     {
@@ -95,7 +95,7 @@ module.exports = [
         votes_for_review: 0,
         body: "A fantastic spot for adventurous couples.",
         created_at: 1671325200000,
-        location_id: 11,
+        location_id: 9,
         rating_for_location: 5
     },
     {

@@ -34,7 +34,12 @@ exports.insertReview = (newReview, location_id, next) => {
     const votes_for_review = 0;
     const created_at = new Date(Date.now())
 
+    return ReviewModel.findOne({}, { review_id: 1 }, { sort: { review_id: -1 } })
+        .then((maxReview) => {
+            const newReviewId = maxReview ? maxReview.review_id + 1 : 1;
+
     const reviewDocument = new ReviewModel({
+        review_id: newReviewId,
         username,
         uid,
         body,
@@ -48,6 +53,7 @@ exports.insertReview = (newReview, location_id, next) => {
         .then((savedReview) => {
             return savedReview;
         })
+    })
 };
 
 exports.removeReview = (review_id) => {

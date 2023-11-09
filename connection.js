@@ -14,20 +14,6 @@ if (!process.env.MONGO_URL) {
   throw new Error('MONGO_URL not set')
 }
 
-
-function dropAndCreateTestDatabase() {
-  if (process.env.NODE_ENV === 'test') {
-    return mongoose.connection.dropDatabase()
-      .then(() => {
-        return mongoose.connection.db.createCollection('test-database');
-      })
-      .then(() => {
-      })
-  }
-}
-
-  dropAndCreateTestDatabase()
-
   const config = {};
 
   if (ENV === 'production') {
@@ -36,6 +22,5 @@ function dropAndCreateTestDatabase() {
 
   module.exports = {
     db: mongoose.connection,
-    dropAndCreateTestDatabase,
   }
   

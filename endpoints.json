@@ -6,7 +6,7 @@
     "GET /api/locations" : {
         "description" : "serves all the coordinates of safe swimming spots",
         "queries" : ["sort_by", "distance", "order"],
-        "sort by": ["rating", "distance"],
+        "sort by": ["rating", "distance", "created_at"],
         "exampleResponse" : {
             "locations" : [ {
                 "coordinates" : [53.4084,  2.9916],
@@ -103,10 +103,10 @@
         "example Body" : {
             "uid" :"LZcUD0th7Tay0l2d6ODkJ8Zfi7s1",
             "location_name": "Lake near liverpool",
+            "location_area": "Liverpool",
+            "body": "Great lake",
             "coordinates" : [53.4084,  2.9916],
-            "??????" : "add image later >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+            "location_img_url": "https://media.istockphoto.com/id/518181226/photo/brighton-ferris-wheel-beachfront-panoramic-view.jpg?s=612x612&w=0&k=20&c=d_itIAgf5mv1PtDHGTak0HMRQl0ANZBKUFBoWrDnG8k="
         }
     }
-
-    
 }

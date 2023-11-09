@@ -24,7 +24,6 @@ const getCoastalSpots = async () => {
                 ? item.latestComplianceAssessment.complianceClassification.name._value
                 : null,
             water_classification_date: waterTestDate,
-            avg_rating: null,
             location_img_url: bodyAndImgData.webResImage || null,
             body: bodyAndImgData.bathingWaterDescription._value || null
         };

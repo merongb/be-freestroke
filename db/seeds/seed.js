@@ -39,8 +39,7 @@ const locationSchema = new mongoose.Schema({
   },
   review_count: Number,
   water_classification: String,
-  water_classification_date: String,
-  avg_rating: Number
+  water_classification_date: String
 },
 { versionKey: false }
 );
@@ -98,29 +97,8 @@ function seedData({locationData, reviewData}, LocationModel, ReviewModel) {
           ...review,
           review_id: index + 1,
         }))
-        const avgRatings = reviewData.reduce((acc, review) => {
-          const { location_id, rating_for_location } = review;
-          if (!acc[location_id]) {
-            acc[location_id] = { sum: rating_for_location, count: 1 };
-          } else {
-            acc[location_id].sum += rating_for_location;
-            acc[location_id].count += 1;
-          }
-          return acc;
-        }, {});
 
-        const locationsDataWithAvg = locationsWithIds.map((location) => {
-          const { location_id } = location;
-          const avgRatingData = avgRatings[location_id];
-          const avg_rating = avgRatingData ? avgRatingData.sum / avgRatingData.count : null;
-  
-          return {
-            ...location,
-            avg_rating,
-          };
-        })
-
-        const convertedLocationData = locationsDataWithAvg.map(convertLocationDateToISOString)
+        const convertedLocationData = locationsWithIds.map(convertLocationDateToISOString)
         const convertedReviewData = reviewsWithIds.map(convertReviewDateToISOString)
 
         return Promise.all([

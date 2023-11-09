@@ -96,7 +96,7 @@ module.exports = [
         body: "A fantastic spot for adventurous couples.",
         created_at: 1671325200000,
         location_id: 9,
-        rating_for_location: 5
+        rating_for_location: 4
     },
     {
         uid: "LZcUD0th7Tay0l2d6ODKJ8Zfi7s12",

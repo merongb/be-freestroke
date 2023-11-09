@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
+const { ReviewModel} = require("../../db/seeds/seed")
 
 exports.fetchReviewsForLocation = (location_id, limit=10, p=1) => {
-    const ReviewModel = mongoose.model("Review");
-
     const numericLocationId = Number(location_id);
     const offset = (p - 1) * limit
 
@@ -28,8 +27,6 @@ exports.fetchReviewsForLocation = (location_id, limit=10, p=1) => {
 };
 
 exports.insertReview = (newReview, location_id, next) => {
-    const ReviewModel = mongoose.model("Review");
-
     const { username, uid, body, rating_for_location } = newReview;
     const votes_for_review = 0;
     const created_at = new Date(Date.now())
@@ -57,8 +54,6 @@ exports.insertReview = (newReview, location_id, next) => {
 };
 
 exports.removeReview = (review_id) => {
-    const ReviewModel = mongoose.model("Review");
-
     const numericReviewId = Number(review_id);
     
     if (isNaN(numericReviewId)) {
@@ -77,7 +72,6 @@ exports.removeReview = (review_id) => {
 
 
 exports.updateReviewVotes = (reviewId, voteChange) => {
-    const ReviewModel = mongoose.model("Review");
     const numericVoteChange = Number(voteChange);
 
     if (isNaN(numericVoteChange)) {

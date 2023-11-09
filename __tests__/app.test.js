@@ -88,6 +88,7 @@ describe('GET /api/locations/:location_id', () => {
             expect(body.location[0]).toHaveProperty("location_img_url", expect.any(String));
             expect(body.location[0]).toHaveProperty("water_classification", expect.any(String));
             expect(body.location[0]).toHaveProperty("water_classification_date", expect.any(String));
+            expect(body.location[0]).toHaveProperty("avg_rating", expect.any(Number));
             })
         });
     test("should return a status code of 404 Not Found for a location_id that does not exist", () => {
@@ -96,6 +97,14 @@ describe('GET /api/locations/:location_id', () => {
             .expect(404)
             .then(({ body }) => {
                 expect(body.message).toBe('Location Does Not Exist!')
+            });
+    });
+    test('should return correct avg_rating', () => {
+        return request(app)
+            .get('/api/locations/9')
+            .expect(200)
+            .then(({ body }) => {
+                expect(body.location[0].avg_rating).toBe(4.5)
             });
     });
 });

@@ -6,6 +6,7 @@ module.exports = [
         location_name: "Test lake spot",
         location_area: "Merseyside",
         water_classification: 'excellent',
+        avg_rating: null,
         water_classification_date: "2023-09-24T12:15:00",
         location_img_url: "http://environment.data.gov.uk/media/image/bathing-water-profile/ukc2102-03600_1-webres.jpg",
         body: "Spittal Beach is a gently sloping resort beach approximately one kilometre long situated immediately south of the mouth of the River Tweed.",
@@ -17,6 +18,7 @@ module.exports = [
         location_name: "Brighton Beach",
         location_area: "East Sussex",
         water_classification: 'excellent',
+        avg_rating: null,
         water_classification_date: "2023-11-15T12:30:00",
         location_img_url: "http://example.com/brighton-beach.jpg",
         body: "Brighton Beach is a popular seaside destination on the south coast of England."
@@ -28,6 +30,7 @@ module.exports = [
         location_name: "Barry Island",
         location_area: "Vale of Glamorgan",
         water_classification: 'good',
+        avg_rating: null,
         water_classification_date: "2023-11-10T14:15:00",
         location_img_url: "http://example.com/barry-island.jpg",
         body: "Barry Island is a family-friendly beach in South Wales."
@@ -39,6 +42,7 @@ module.exports = [
         location_name: "Liverpool Docks",
         location_area: "Merseyside",
         water_classification: 'excellent',
+        avg_rating: null,
         water_classification_date: "2023-11-05T13:00:00",
         location_img_url: "http://example.com/liverpool-docks.jpg",
         body: "Liverpool Docks offer scenic views of the Mersey River and historic waterfront."
@@ -50,6 +54,7 @@ module.exports = [
         location_name: "Portobello Beach",
         location_area: "Edinburgh",
         water_classification: 'excellent',
+        avg_rating: null,
         water_classification_date: "2023-10-25T11:30:00",
         location_img_url: "http://example.com/portobello-beach.jpg",
         body: "Portobello Beach is a charming coastal suburb in the Scottish capital."
@@ -61,6 +66,7 @@ module.exports = [
         location_name: "Weston-super-Mare",
         location_area: "Somerset",
         water_classification: 'good',
+        avg_rating: null,
         water_classification_date: "2023-11-01T14:45:00",
         location_img_url: "http://example.com/weston-super-mare.jpg",
         body: "Weston-super-Mare is a traditional seaside town on the Bristol Channel coast."
@@ -72,6 +78,7 @@ module.exports = [
         location_name: "Albert Dock",
         location_area: "Liverpool",
         water_classification: 'excellent',
+        avg_rating: null,
         water_classification_date: "2023-10-30T12:15:00",
         location_img_url: "http://example.com/albert-dock.jpg",
         body: "Albert Dock is a vibrant waterfront complex in Liverpool's city center."
@@ -83,6 +90,7 @@ module.exports = [
         location_name: "Bournemouth Beach",
         location_area: "Dorset",
         water_classification: 'good',
+        avg_rating: null,
         water_classification_date: "2023-10-15T11:00:00",
         location_img_url: "http://example.com/bournemouth-beach.jpg",
         body: "Bournemouth Beach is a popular stretch of golden sand on the South Coast."
@@ -94,6 +102,7 @@ module.exports = [
         location_name: "Swansea Bay",
         location_area: "Swansea",
         water_classification: 'excellent',
+        avg_rating: null,
         water_classification_date: "2023-10-20T15:30:00",
         location_img_url: "http://example.com/swansea-bay.jpg",
         body: "Swansea Bay offers scenic views of the Gower Peninsula and Mumbles Lighthouse."

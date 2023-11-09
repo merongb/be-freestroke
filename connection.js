@@ -3,7 +3,7 @@ const dotenv = require('dotenv')
 
 const ENV = process.env.NODE_ENV || 'development';
 dotenv.config({
-  path: `./.env.${ENV}`
+  path: `${__dirname}/.env.${ENV}`
 })
 
 mongoose.connect(process.env.MONGO_URL, {

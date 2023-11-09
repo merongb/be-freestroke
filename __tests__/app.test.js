@@ -402,7 +402,6 @@ describe('POST /api/locations', () => {
       location_area: "Brighton",
       body: "Just a random place in brighton",
       location_img_url: "https://media.istockphoto.com/id/518181226/photo/brighton-ferris-wheel-beachfront-panoramic-view.jpg?s=612x612&w=0&k=20&c=d_itIAgf5mv1PtDHGTak0HMRQl0ANZBKUFBoWrDnG8k=",
-      created_at: new Date()
     }
     return request(app).post(`/api/locations`).send(newLocation).expect(201).then(({body}) => {
       expect(body.location).toHaveProperty("location_name", expect.any(String));
@@ -420,7 +419,6 @@ describe('POST /api/locations', () => {
       location_area: 123,
       body: 1234,
       location_img_url: 123,
-      created_at: new Date()
     }
     return request(app).post(`/api/locations`).send(newLocation).expect(400).then(({body}) => {
       expect(body.message).toBe("Bad Request")

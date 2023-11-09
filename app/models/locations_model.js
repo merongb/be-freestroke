@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
+const {LocationModel} = require("../../db/seeds/seed")
 
 exports.fetchAllLocations = (distance, sort_by = 'created_at', order = 'desc', limit = 10, p = 1) => {
-    const LocationModel = mongoose.model("Location")
     const offset = (p - 1) * limit
     const query = LocationModel.find({});
 
@@ -24,8 +24,6 @@ exports.fetchAllLocations = (distance, sort_by = 'created_at', order = 'desc', l
 };
 
 exports.fetchLocationById = (location_id) => {
-const LocationModel = mongoose.model("Location")
-
 return LocationModel.find({ location_id })
         .then((location) => {
             if (location.length === 0) {
@@ -38,8 +36,6 @@ return LocationModel.find({ location_id })
 }
 
 exports.insertLocation = (newLocation) => {
-    const LocationModel = mongoose.model("Location")
-
     const {coordinates, location_name, location_area, body, location_img_url,username, uid,  } = newLocation
     const created_at = new Date(Date.now())
 

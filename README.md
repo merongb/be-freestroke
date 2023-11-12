@@ -1,46 +1,71 @@
 # be-freestroke
 
-Freestroke - Safe Outdoor Swimming Location API Guide
-Developers, take note: To establish a connection with the databases, you must set up two environment (.env) files. The first is for the test database, and the second for the primary development database. Within these files, input "MONGO_URL=" followed by the respective database name. Once set up, ensure proper linkage with dotenv.
+## Hosted Version: https://freestroke-api.onrender.com/api
 
-Cloud Application Link:
-https://freestroke-api.onrender.com/api
+### Freestroke - Safe Outdoor Swimming Location API Guide
 
-Project Overview:
+## Project Overview:
+
 This component is a segment of a more extensive project where we are developing a comprehensive application for a Safe Outdoor Swimming Location App. The backend of this project utilizes a Restful API and is supported by a MongoDB database, interfaced through mongosh. With the provided API endpoints, users can perform a variety of actions, including viewing and posting locations, as well as reviews. Users will also be able to vote on each review. Locations can be sorted in ascending / descending order based on distance away from user. For a detailed list of available API endpoints, refer to the endpoints.json file.
 
-Tech Stack:
+### Tech Stack:
 
-JavaScript
-Express
-MongoDB
-Node.js
-Jest
-Husky
-SuperTest
-Setup Instructions:
+- JavaScript
+- Express
+- MongoDB
+- Node.js
+- Jest
 
-Fork the Repository: Navigate to the public be-freestroke project repository on our GitHub and click on the fork button.
+## Setup Instructions:
 
-Clone Your Fork: Post-forking, you'll find the project in your GitHub repositories with your username prefixed to the repo name. Copy the URL.
+### 1. Clone repo
 
-Clone to Local: In your terminal, use the command git clone [your-forked-repo-link].
+```
+git clone https://github.com/merongb/be-freestroke
+```
 
-Authentication: If prompted, enter your GitHub credentials. For the password, use a personal access token, available in your GitHub settings.
+### 2. Create a .env.test file
 
-Local Setup: After cloning, open the project in your code editor.
+```
+.env.test
+```
 
-Install Dependencies: Within the project directory in your terminal, run npm install.
+> Inside should have the following `MONGO_URL=mongodb://localhost:27017/test-database`
 
-Seed the Database: Execute npm run setup-dbs followed by npm run seed to populate the database with sample data.
+### 3. Install required dependencies
 
-View the Database: Use mongosh in the terminal, followed by desired MongoDB commands to select the required database.
+```
+npm install
+```
 
-Run Tests: Input npm t to execute the project tests.
+### 4. Seed the Data to local Database
 
-Version Requirements:
+```
+'npm run seed'
+```
 
-Node: v20.2.0 or higher
+> `For test data`
+
+```
+'npm run test'
+```
+
+> `For test data`
+
+### 5. Connect to local Database
+
+1. ```
+   Mongosh
+   ```
+2. ```
+   use test-database
+   ```
+
+## Version requirements
+
+```
+Node v18.17.1
 MongoDB: 7.0.2 or higher
+```
 
 Group: Team300

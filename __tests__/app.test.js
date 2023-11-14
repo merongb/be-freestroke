@@ -218,7 +218,7 @@ describe("GET /api/locations/:location_id/reviews", () => {
     });
 });
 
-describe('POST /api/location/:location_id/reviews', () => {
+describe('POST /api/locations/:location_id/reviews', () => {
     test('should return 201 status code and return the new posted review', () => {
         const newReview = {
                             username: "rogershop",
@@ -227,7 +227,7 @@ describe('POST /api/location/:location_id/reviews', () => {
                             rating_for_location: 3
                         }
         return request(app)
-        .post('/api/location/2/reviews')
+        .post('/api/locations/2/reviews')
         .send(newReview)
         .expect(201)
         .then((res) => {
@@ -251,7 +251,7 @@ describe('POST /api/location/:location_id/reviews', () => {
                             extraKey: 'extraValue'
                             }
         return request(app)
-        .post('/api/location/3/reviews')
+        .post('/api/locations/3/reviews')
         .send(newReview)
         .expect(201)
         .then((res) => {
@@ -274,7 +274,7 @@ describe('POST /api/location/:location_id/reviews', () => {
                             rating_for_location: 3,
                             }
         return request(app)
-        .post('/api/location/notAnID/reviews')
+        .post('/api/locations/notAnID/reviews')
         .send(newReview)
         .expect(400)
         .then(({body})=>{
@@ -289,7 +289,7 @@ describe('POST /api/location/:location_id/reviews', () => {
                             rating_for_location: 3,
                             }
         return request(app)
-        .post('/api/location/1/reviews')
+        .post('/api/locations/1/reviews')
         .send(newReview)
         .expect(400)
         .then ((res)=>{
@@ -303,7 +303,7 @@ describe('POST /api/location/:location_id/reviews', () => {
                         rating_for_location: 3,
                         }
         return request(app)
-        .post('/api/location/1/reviews')
+        .post('/api/locations/1/reviews')
         .send(newReview)
         .expect(400)
         .then ((res)=>{

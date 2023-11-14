@@ -410,7 +410,7 @@ describe('DELETE /api/reviews/:review_id',()=>{
         })
     })
 })
-describe.only('POST /api/locations', () => {
+describe('POST /api/locations', () => {
   test('returns a 201 status code and the posted location ', () => {
     const newLocation = 
     {

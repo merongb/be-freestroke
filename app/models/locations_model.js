@@ -70,7 +70,7 @@ exports.fetchLocationById = (location_id) => {
 exports.insertLocation = (newLocation) => {
     const {coordinates, location_name, location_area, body, location_img_url,username, uid,  } = newLocation
     const created_at = new Date(Date.now())
-
+    const switchedCoordinates = [coordinates[1], coordinates[0]]
 
     return LocationModel.findOne({}, { location_id: 1 }, { sort: { location_id: -1 } })
     .then((maxLocation) => {
@@ -80,12 +80,14 @@ exports.insertLocation = (newLocation) => {
     const location = new LocationModel({
         username,
         uid,
-        coordinates,
+        coordinates: switchedCoordinates,
         location_name,
         location_area,
         body,
         location_img_url,
         created_at,
+        water_classification: null,
+        water_classification_date: null,
         location_id: newLocationId
     });
 

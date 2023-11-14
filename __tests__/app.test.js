@@ -430,7 +430,7 @@ describe('POST /api/locations', () => {
       expect(body.location).toHaveProperty("water_classification");
     })
   });
-  test('returns a 201 status code and the posted location ', () => {
+  test('returns a 201 status code and the posted location with the coordinates the right way round', () => {
     const newLocation = 
     {
       coordinates: [50.1111, -1.2222],
